@@ -1,5 +1,6 @@
 package seleniumlearning;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
@@ -38,21 +39,36 @@ public class Lesson1 {
         WebElement passwd = driver.findElement(By.name("password"));
         WebElement signin = driver.findElement(By.name("login"));
         
-        usrname.sendKeys("pablo609");
-        passwd.sendKeys("test");
+        if(usrname.isEnabled())
+        	usrname.sendKeys("tutorial");
+        passwd.sendKeys("tutorial");
         signin.click();
         System.out.println(driver.getCurrentUrl());
+        
+        WebElement radiobutton = driver.findElement(By.cssSelector("input[value=oneway]"));
+        System.out.println(radiobutton.isSelected());
+        if(!radiobutton.isSelected())
+        	radiobutton.click();
+        try {
+        	Thread.sleep(3000);
+        } catch (Exception e) {}
         driver.navigate().back();
         
         driver.get("http://output.jsbin.com/usidix/1");
         
         driver.findElement(By.cssSelector("input[type=button]")).click();
         System.out.println(driver.switchTo().alert().getText());
-        WebDriverWait timer = new WebDriverWait(driver, 10);
-        
+        WebDriverWait timer = new WebDriverWait(driver, 5);
         driver.switchTo().alert().accept();
+        timer.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("input[type=button]")));
+        
+        try {
+        	timer.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.name("nonexisting")));
+        } catch (TimeoutException te) {
+        	System.out.println(te.toString());
+        }
               
-        //driver.close();
+        driver.close();
         
         System.exit(0);
 	}
