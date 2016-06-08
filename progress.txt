@@ -1,3 +1,2 @@
 http://www.guru99.com/selenium-tutorial.html
-http://www.guru99.com/first-webdriver-script.html#Explicit Wait
-
+http://www.guru99.com/accessing-forms-in-webdriver.html - Radio Button
