@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 public class NewtoursPage {
 	public NewtoursPage(WebDriver driver) {
 		_driver = driver;
-		driver.get("http://newtours.demoaut.com/");
+		loadMainPage();
 	}
 	public void close() {
 		_driver.close();
@@ -24,6 +24,9 @@ public class NewtoursPage {
 		}
 		else
 			throw new Exception("Not on the Main Page!");
+	}
+	public void loadMainPage() {
+		_driver.get("http://newtours.demoaut.com/");
 	}
 	
 	private WebDriver _driver;
