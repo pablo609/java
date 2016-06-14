@@ -28,6 +28,16 @@ public class NewtoursPage {
 	public void loadMainPage() {
 		_driver.get("http://newtours.demoaut.com/");
 	}
+	public void waitAndClose() {
+		waitAndClose(3000);
+	}
+	public void waitAndClose(int miliseconds) {
+		try {
+        	Thread.sleep(miliseconds);
+        } catch (Exception e) {}
+		
+		close();
+	}
 	
 	private WebDriver _driver;
 }

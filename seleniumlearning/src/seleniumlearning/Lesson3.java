@@ -14,6 +14,10 @@ public class Lesson3 {
 		
 		page.loadMainPage();
 		
+		WebElement tab = driver.findElement(By.xpath("//table[@width=\"270\"]/tbody/tr[2]/td[2]/div/font/b"));
+		
+		System.out.println(tab.getText());
+		
 		List<WebElement> linkslist = driver.findElements(By.tagName("a"));
 		String[] linkstext = new String[linkslist.size()];
 		int i = 0;
@@ -23,12 +27,12 @@ public class Lesson3 {
 		}
 		
 		for(String link : linkstext) {
-			//driver.findElement(By.linkText(link)).click();
+			driver.findElement(By.linkText(link)).click();
 			if(driver.getTitle().equals("Under Construction: Mercury Tours"))
 				System.out.println(link + " - " + "Still Under Construction");
 			else
 				System.out.println(link + " - " + "Finished");
-			//driver.navigate().back();
+			driver.navigate().back();
 		}
 		
 		FacebookPage facebook = new FacebookPage(driver);
