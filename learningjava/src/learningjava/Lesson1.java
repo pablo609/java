@@ -1,27 +1,28 @@
 package learningjava;
 
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class Lesson1 {
 	@Test
-	public void test() {
-		int[] array = {1,2,3,4,5};
+	public void test() throws InterruptedException {
+		SimpleDateFormat dateformat = new SimpleDateFormat();
+		Date date1 = new Date();
 		
-		int[] array2;
+		Thread.sleep(3000);
 		
-		array2 = new int[]{45,34,33,31};
+		Date date2 = new Date();
+		Date date3 = (Date) date2.clone();
 		
-		Arrays.sort(array2);
+		dateformat.applyPattern("yyyy.MM.dd HH:mm:ss");
+		System.out.println("Date1: " + date1.toString() + " - " + dateformat.format(date1));
+		System.out.println("Date2: " + date2.toString() + " - " + dateformat.format(date2));
+		System.out.println("Date3: " + date3.toString() + " - " + dateformat.format(date3));
 		
-		for(int a : array) {
-			System.out.println(a);
-		}
-		
-		for(int a : array2) {
-			System.out.println(a);
-		}
+		Assert.assertTrue(date2.after(date1));
+		Assert.assertTrue(date3.equals(date2));
 	}
 }
