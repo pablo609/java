@@ -1,6 +1,5 @@
 http://www.guru99.com/selenium-tutorial.html
 http://www.guru99.com/cross-browser-testing-using-selenium.html
-How to perform Cross Browser Testing
 
 http://www.tutorialspoint.com/java/java_files_io.htm
 Standard Streams
