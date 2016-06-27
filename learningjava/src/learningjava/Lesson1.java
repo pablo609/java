@@ -1,28 +1,24 @@
 package learningjava;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class Lesson1 {
 	@Test
-	public void test() throws InterruptedException {
-		SimpleDateFormat dateformat = new SimpleDateFormat();
-		Date date1 = new Date();
+	public void test() throws IOException  {
+		InputStreamReader cin = null;
 		
-		Thread.sleep(3000);
+		cin = new InputStreamReader(System.in);
+		char c;
+		do {
+			c= (char) cin.read();
+			System.out.println(c);
+		} while(c != 'q');
 		
-		Date date2 = new Date();
-		Date date3 = (Date) date2.clone();
-		
-		dateformat.applyPattern("yyyy.MM.dd HH:mm:ss");
-		System.out.println("Date1: " + date1.toString() + " - " + dateformat.format(date1));
-		System.out.println("Date2: " + date2.toString() + " - " + dateformat.format(date2));
-		System.out.println("Date3: " + date3.toString() + " - " + dateformat.format(date3));
-		
-		Assert.assertTrue(date2.after(date1));
-		Assert.assertTrue(date3.equals(date2));
+		cin.close();
 	}
 }

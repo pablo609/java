@@ -1,8 +1,7 @@
 http://www.guru99.com/selenium-tutorial.html
 http://www.guru99.com/database-testing-using-selenium-step-by-step-guide.html
 
-http://www.tutorialspoint.com/java/java_files_io.htm
-Standard Streams
+http://www.tutorialspoint.com/java/java_data_structures.htm
 
 TODO
 http://www.tutorialspoint.com/java/java_regular_expressions.htm
