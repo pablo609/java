@@ -1,5 +1,7 @@
 http://www.guru99.com/selenium-tutorial.html
-http://www.guru99.com/database-testing-using-selenium-step-by-step-guide.html
+http://www.guru99.com/xpath-selenium.html
+http://www.guru99.com/handling-ajax-call-selenium-webdriver.html
+http://www.guru99.com/firefox-profile-selenium-webdriver.html
 
 http://www.tutorialspoint.com/java/java_files_io.htm
 Standard Streams
