@@ -1,8 +1,7 @@
+[selenium]
 http://www.guru99.com/selenium-tutorial.html
-http://www.guru99.com/handling-ajax-call-selenium-webdriver.html
-http://www.guru99.com/firefox-profile-selenium-webdriver.html
 
+[java]
 http://www.tutorialspoint.com/java/java_data_structures.htm
-
 TODO
 http://www.tutorialspoint.com/java/java_regular_expressions.htm

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facebooktestdata>
+	<mainloginpage>
+		<url>https://www.facebook.com/</url>
+		<title>Facebook - Log In or Sign Up</title>
+		<login>john602@o2.pl</login>
+		<password>John602</password>
+	</mainloginpage>
+</facebooktestdata>
