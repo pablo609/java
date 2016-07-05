@@ -2,6 +2,7 @@
 http://www.guru99.com/selenium-tutorial.html
 
 [java]
-http://www.tutorialspoint.com/java/java_data_structures.htm
+http://www.tutorialspoint.com/java/java_applet_basics.htm
 TODO
-http://www.tutorialspoint.com/java/java_regular_expressions.htm
+http://www.tutorialspoint.com/java/java_regular_expressions.htmi
+http://www.javatpoint.com/collections-in-java
