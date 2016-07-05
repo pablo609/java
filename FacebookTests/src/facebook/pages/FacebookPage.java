@@ -1,7 +1,8 @@
 package facebook.pages;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 
 public class FacebookPage {
@@ -9,6 +10,7 @@ public class FacebookPage {
 	
 	public FacebookPage(WebDriver driver) {
 		this.driver = driver;
+		//this.driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 	}
 	
 	public String getPageTitle() {

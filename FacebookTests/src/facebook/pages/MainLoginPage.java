@@ -12,8 +12,12 @@ public class MainLoginPage extends FacebookPage {
 		super(driver);
 	}
 	
-	public void loadPage() {
+	public void load() {
 		driver.get("https://www.facebook.com");
+	}
+	
+	public boolean isLoaded() {
+		return getPageTitle().equals("Facebook - Log In or Sign Up");
 	}
 	
 	public void setEmailLogin(String text) {

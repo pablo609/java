@@ -7,6 +7,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import facebook.pages.LoginPage;
 import facebook.pages.MainLoginPage;
 
 public class MainLoginPageBasicTest {
@@ -16,7 +17,7 @@ public class MainLoginPageBasicTest {
 	@BeforeTest
 	public void setup() {
 		page = new MainLoginPage(driver);
-		page.loadPage();
+		page.load();
 	}
 	
 	@AfterTest
@@ -26,14 +27,16 @@ public class MainLoginPageBasicTest {
 	
 	@Test
 	public void verifyMainLoginPageTitle() {
-		Assert.assertEquals(page.getPageTitle(), "Facebook - Log In or Sign Up");
+		Assert.assertTrue(page.isLoaded());
 	}
 	
 	@Test
 	public void verifyMainLoginPageBadLogin() {
-		page.setEmailLogin("wrong");
+		page.setEmailLogin("wronglogin");
 		page.setPasswordLogin("wrongpass");
 		page.logIn();
-		page.loadPage();
+		LoginPage tmpPage = new LoginPage(driver);
+		Assert.assertTrue(tmpPage.isLoaded());
+		page.load();
 	}
 }
