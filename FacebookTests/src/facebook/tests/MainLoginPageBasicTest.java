@@ -1,7 +1,6 @@
 package facebook.tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -9,14 +8,18 @@ import org.testng.annotations.Test;
 
 import facebook.pages.LoginPage;
 import facebook.pages.MainLoginPage;
+import facebook.util.BrowserFactory;
+import facebook.util.FirefoxFactory;
 
 public class MainLoginPageBasicTest {
-	WebDriver driver = new FirefoxDriver();
+	BrowserFactory factory = FirefoxFactory.getInstance();
+	WebDriver driver = null;
 	MainLoginPage page = null;
 	
 	@BeforeTest
 	public void setup() {
-		page = new MainLoginPage(driver);
+		driver = factory.createWebDriver();
+		page = factory.createMainLoginPage(driver);
 		page.load();
 	}
 	
@@ -35,7 +38,7 @@ public class MainLoginPageBasicTest {
 		page.setEmailLogin("wronglogin");
 		page.setPasswordLogin("wrongpass");
 		page.logIn();
-		LoginPage tmpPage = new LoginPage(driver);
+		LoginPage tmpPage = factory.createLoginPage(driver);
 		Assert.assertTrue(tmpPage.isLoaded());
 		page.load();
 	}

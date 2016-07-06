@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends FacebookPage {
-	private By badLoginWarning = By.xpath("//div[starts-with(text(),'The email')]");
+	private By badLoginWarning = By.xpath("//div[text() = 'Wrong Credentials']");
 	private By passwordLogin = By.id("pass");
 	private By emailLogin = By.id("email");
 	private By loginButton = By.cssSelector("button[id='loginbutton']");
@@ -18,7 +18,7 @@ public class LoginPage extends FacebookPage {
 	}
 	
 	public boolean isBadLoginWarning() {
-		return driver.findElement(badLoginWarning).isDisplayed();
+		return isElementPresent(badLoginWarning);
 	}
 	
 	public boolean isLoaded() {

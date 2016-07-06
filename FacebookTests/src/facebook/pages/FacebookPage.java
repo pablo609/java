@@ -1,8 +1,7 @@
 package facebook.pages;
 
 import org.openqa.selenium.WebDriver;
-import java.util.concurrent.TimeUnit;
-
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 
 public class FacebookPage {
@@ -18,10 +17,19 @@ public class FacebookPage {
 	}
 	
 	public void setText(By element, String text) {
-		driver.findElement(element).sendKeys(text);
+		WebElement tmpElement = driver.findElement(element);
+		tmpElement.clear();
+		tmpElement.sendKeys(text);
 	}
 	
 	public void click(By element) {
 		driver.findElement(element).click();
+	}
+	
+	public boolean isElementPresent(By element) {
+		if(driver.findElements(element).size() == 0)
+			return false;
+		else
+			return true;
 	}
 }
