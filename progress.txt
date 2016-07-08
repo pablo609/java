@@ -7,3 +7,9 @@ http://www.tutorialspoint.com/java/java_regular_expressions.htm
 
 [design patterns]
 https://sourcemaking.com/design_patterns
+
+[OO principles]
+http://www.slideshare.net/wakaleo/clean-codingpractices
+https://www.quora.com/How-do-I-write-clean-and-well-organized-code-in-Java
+http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
+http://howtodoinjava.com/best-practices/5-class-design-principles-solid-in-java/
