@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 import facebook.pages.LoginPage;
 import facebook.pages.MainLoginPage;
 import facebook.util.BrowserFactory;
-import facebook.util.FirefoxFactory;
+import facebook.util.FactorySelector;
 
 public class MainLoginPageBasicTest {
-	BrowserFactory factory = FirefoxFactory.getInstance();
+	BrowserFactory factory = FactorySelector.getBrowserFactory();
 	WebDriver driver = null;
 	MainLoginPage page = null;
 	
@@ -26,7 +26,7 @@ public class MainLoginPageBasicTest {
 	
 	@AfterTest
 	public void cleanup() {
-		driver.close();
+		driver.quit();
 	}
 	
 	@Test

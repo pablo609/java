@@ -1,21 +1,17 @@
 package facebook.tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import facebook.pages.LoginPage;
-import facebook.pages.MainLoginPage;
 import facebook.util.BrowserFactory;
-import facebook.util.FirefoxFactory;
+import facebook.util.FactorySelector;
 
 public class LoginPageBasicTest {
-	BrowserFactory factory = FirefoxFactory.getInstance();
+	BrowserFactory factory = FactorySelector.getBrowserFactory();
 	WebDriver driver = null;
 	LoginPage page = null;
 	
@@ -28,7 +24,7 @@ public class LoginPageBasicTest {
 	
 	@AfterTest
 	public void cleanup() {
-		driver.close();
+		driver.quit();
 	}
 	
 	@Test
