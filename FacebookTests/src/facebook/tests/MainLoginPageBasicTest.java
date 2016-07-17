@@ -13,12 +13,13 @@ import facebook.util.BrowserFactory;
 import facebook.util.FactorySelector;
 
 public class MainLoginPageBasicTest {
-	BrowserFactory factory = FactorySelector.getBrowserFactory();
+	BrowserFactory factory = null;
 	WebDriver driver = null;
 	MainLoginPage page = null;
 	
 	@BeforeTest
 	public void setup() {
+		factory = FactorySelector.getBrowserFactory();
 		driver = factory.createWebDriver();
 		page = factory.createMainLoginPage(driver);
 		page.load();
@@ -26,7 +27,7 @@ public class MainLoginPageBasicTest {
 	
 	@AfterTest
 	public void cleanup() {
-		driver.quit();
+		driver.close();
 	}
 	
 	@Test

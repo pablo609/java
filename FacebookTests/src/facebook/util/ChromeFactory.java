@@ -2,6 +2,7 @@ package facebook.util;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import facebook.pages.LoginPage;
 import facebook.pages.MainLoginPage;
@@ -11,7 +12,6 @@ public class ChromeFactory implements BrowserFactory {
 	
 	public static BrowserFactory getInstance() {
 		if(factory == null) {
-			System.setProperty("webdriver.chrome.driver","C:\\seleniumdrivers\\chromedriver.exe");
 			factory = new ChromeFactory();
 		}
 		
@@ -20,7 +20,13 @@ public class ChromeFactory implements BrowserFactory {
 	
 	@Override
 	public WebDriver createWebDriver() {
-		return new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver","C:\\seleniumdrivers\\chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--user-data-dir=c:/seleniumdrivers/chromeprofile/");
+		options.addArguments("--start-maximized");
+		WebDriver driver = new ChromeDriver(options);
+		//driver.manage().window().maximize();
+		return driver;
 	}
 
 	@Override

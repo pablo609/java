@@ -14,12 +14,12 @@ public class MainLoginPage extends FacebookPage {
 	private By regPassword = By.name("reg_passwd__");
 	private By regBirthdayDay = By.name("birthday_day");
 	private By regBirthdayMonth = By.name("birthday_month");
-	private By regBirthdayYear = By.name("birthday_year");
-	private By regFemale = By.xpath("//*[@name='sex'][@value='1']");
-	private By regMale = By.xpath("//*[@name='sex'][@value='2']");
+	private By regBirthdayYear = By.name("birthday_year"); 
+	private By regFemale = By.cssSelector("*[name='sex'][value='1']"); //By.xpath("//*[@name='sex'][@value='1']"); 
+	private By regMale = By.cssSelector("*[name='sex'][value='2']"); //By.xpath("//*[@name='sex'][@value='2']");
 	private By regButton = By.name("websubmit");
 	private By processingRegRequest = By.xpath("//button[@name='websubmit']/following-sibling::span/img");
-	
+		
 	public MainLoginPage(WebDriver driver) {
 		super(driver);
 	}

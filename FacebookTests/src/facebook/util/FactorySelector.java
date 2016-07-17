@@ -12,17 +12,21 @@ public class FactorySelector {
 	private static final HashMap<String, BrowserFactory> browserFactories = new HashMap<String, BrowserFactory>();
 	static
 	{
+		browserFactories.put(null, FirefoxFactory.getInstance());
 		browserFactories.put("firefox", FirefoxFactory.getInstance());
 		browserFactories.put("chrome", ChromeFactory.getInstance());
 		//System.setProperty("webdriver.ie.driver","C:\\seleniumdrivers\\IEDriverServer32.exe");
 		//driver = new InternetExplorerDriver();
 	}
+	private static BrowserFactory selectedBrowserFactory = null;
 	
 	public static BrowserFactory getBrowserFactory() {
-		BrowserFactory selectedBrowserFactory = browserFactories.get(getBrowserPropertyValueFromFile());
-		
 		if(selectedBrowserFactory == null) {
-			selectedBrowserFactory = FirefoxFactory.getInstance();
+			selectedBrowserFactory = browserFactories.get(getBrowserPropertyValueFromFile());
+			
+			if(selectedBrowserFactory == null) {
+				selectedBrowserFactory = FirefoxFactory.getInstance();
+			}
 		}
 		
 		return selectedBrowserFactory;
@@ -35,7 +39,7 @@ public class FactorySelector {
 		
 		try {
 			propertiesInStream = new FileInputStream(propertiesFile);
-			properties.load(propertiesInStream);		
+			properties.load(propertiesInStream);
 		}
 		catch(IOException e) {
 			e.printStackTrace();

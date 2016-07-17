@@ -4,7 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends FacebookPage {
-	private By badLoginWarning = By.xpath("//div[starts-with(text(),'The email')]");
+	private By badLoginWarningV1 = By.xpath("//div[starts-with(text(),'The email')]");
+	private By badLoginWarningV2 = By.xpath("//div[text() = 'Wrong Credentials']");
 	private By passwordLogin = By.id("pass");
 	private By emailLogin = By.id("email");
 	private By loginButton = By.cssSelector("button[id='loginbutton']");
@@ -18,14 +19,14 @@ public class LoginPage extends FacebookPage {
 	}
 	
 	public boolean isBadLoginWarning() {
-		if(this.isElementPresent(badLoginWarning))
-			return isElementVisible(badLoginWarning);
+		if(this.isElementPresent(badLoginWarningV1))
+			return isElementVisible(badLoginWarningV1);
 		else
-			return false;
+			return this.isElementPresent(badLoginWarningV2);
 	}
 	
 	public boolean isLoaded() {
-		return getPageTitle().equals("Log in to Facebook | Facebook");
+		return getPageTitle().equals("Log into Facebook | Facebook");
 	}
 	
 	public void setPasswordLogin(String text) {
