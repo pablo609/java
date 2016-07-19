@@ -15,8 +15,7 @@ public class FactorySelector {
 		browserFactories.put(null, FirefoxFactory.getInstance());
 		browserFactories.put("firefox", FirefoxFactory.getInstance());
 		browserFactories.put("chrome", ChromeFactory.getInstance());
-		//System.setProperty("webdriver.ie.driver","C:\\seleniumdrivers\\IEDriverServer32.exe");
-		//driver = new InternetExplorerDriver();
+		browserFactories.put("ie", IEFactory.getInstance());
 	}
 	private static BrowserFactory selectedBrowserFactory = null;
 	

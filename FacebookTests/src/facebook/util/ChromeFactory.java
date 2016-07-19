@@ -4,10 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import facebook.pages.LoginPage;
-import facebook.pages.MainLoginPage;
-
-public class ChromeFactory implements BrowserFactory {
+public class ChromeFactory extends BrowserFactory {
 	private static BrowserFactory factory = null;
 	
 	public static BrowserFactory getInstance() {
@@ -28,15 +25,4 @@ public class ChromeFactory implements BrowserFactory {
 		//driver.manage().window().maximize();
 		return driver;
 	}
-
-	@Override
-	public MainLoginPage createMainLoginPage(WebDriver driver) {
-		return new MainLoginPage(driver);
-	}
-
-	@Override
-	public LoginPage createLoginPage(WebDriver driver) {
-		return new LoginPage(driver);
-	}
-
 }

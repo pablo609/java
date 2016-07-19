@@ -36,12 +36,12 @@ public class MainLoginPageBasicTest {
 	}
 	
 	@Test
-	public void verifyMainLoginPageBadLogin() {
+	public void verifyMainLoginPageBadLogin() throws InterruptedException {
 		page.setEmailLogin("wronglogin");
 		page.setPasswordLogin("wrongpass");
 		page.logIn();
-		LoginPage tmpPage = factory.createLoginPage(driver);
-		Assert.assertTrue(tmpPage.isLoaded());
+		LoginPage nextPage = factory.createLoginPage(driver);
+		Assert.assertTrue(nextPage.isLoaded());
 		page.load();
 	}
 	

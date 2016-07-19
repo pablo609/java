@@ -36,7 +36,7 @@ public class FacebookPage {
 	}
 	
 	public void click(By element) {
-		driver.findElement(element).click();
+		driver.findElement(element).click();	
 	}
 	
 	public boolean isElementPresent(By element) {
