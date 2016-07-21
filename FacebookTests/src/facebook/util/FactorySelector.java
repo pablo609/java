@@ -22,22 +22,25 @@ public class FactorySelector {
 	public static BrowserFactory getBrowserFactory() {
 		if(selectedBrowserFactory == null) {
 			selectedBrowserFactory = browserFactories.get(getBrowserPropertyValueFromFile());
-			
-			if(selectedBrowserFactory == null) {
-				selectedBrowserFactory = FirefoxFactory.getInstance();
-			}
 		}
 		
 		return selectedBrowserFactory;
 	}
 	
-	private static String getBrowserPropertyValueFromFile() {
+	private static String getBrowserPropertyValueFromFile() {	
+		Properties properties = readBrowserPropertyFromFile();
+			
+		if(properties != null)
+			return properties.getProperty(BROWSER_PROPERTY_NAME);
+		else
+			return null;
+	}
+	
+	private static Properties readBrowserPropertyFromFile() {
 		File propertiesFile = new File(BROWSER_PROPERTIES_FILE);
 		Properties properties = new Properties();
-		FileInputStream propertiesInStream = null;
 		
-		try {
-			propertiesInStream = new FileInputStream(propertiesFile);
+		try(FileInputStream propertiesInStream = new FileInputStream(propertiesFile)) {
 			properties.load(propertiesInStream);
 		}
 		catch(IOException e) {
@@ -45,17 +48,6 @@ public class FactorySelector {
 			properties = null;
 		}
 		
-		try {
-			if(propertiesInStream != null)
-				propertiesInStream.close();
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
-		
-		if(properties != null)
-			return properties.getProperty(BROWSER_PROPERTY_NAME);
-		else
-			return null;
+		return properties;
 	}
 }

@@ -19,10 +19,10 @@ public class LoginPage extends FacebookPage {
 	}
 	
 	public boolean isBadLoginWarning() {
-		if(this.isElementPresent(badLoginWarningV1))
+		if(isElementPresent(badLoginWarningV1))
 			return isElementVisible(badLoginWarningV1);
 		else
-			return this.isElementPresent(badLoginWarningV2);
+			return isElementPresent(badLoginWarningV2);
 	}
 	
 	public boolean isLoaded() {
@@ -30,14 +30,14 @@ public class LoginPage extends FacebookPage {
 	}
 	
 	public void setPasswordLogin(String text) {
-		setText(this.passwordLogin, text);
+		setText(passwordLogin, text);
 	}
 	
 	public void setEmailLogin(String text) {
-		setText(this.emailLogin, text);
+		setText(emailLogin, text);
 	}
 	
 	public void logIn() {
-		click(this.loginButton);
+		click(loginButton);
 	}
 }

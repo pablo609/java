@@ -57,18 +57,21 @@ public class FacebookPage {
 	
 	public boolean isElementVisible(By element, Long timeoutInSec) {
 		boolean retVal = true;
-		WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
+		
 		try {
+			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
 			wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 		}
 		catch(TimeoutException e) {
 			retVal = false;
 		}
+		
 		return retVal;
 	}
 	
 	public boolean isElementVisible(By element, Long timeoutInSec, Long pollingIntervalInMSec) {
 		boolean retVal = true;
+		
 		try {
 			new FluentWait<WebDriver>(driver)							
 				.withTimeout(timeoutInSec, TimeUnit.SECONDS) 			
@@ -83,6 +86,7 @@ public class FacebookPage {
 		catch(TimeoutException e) {
 			retVal = false;
 		}
+		
 		return retVal;
 	}
 }

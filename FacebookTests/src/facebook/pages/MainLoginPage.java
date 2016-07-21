@@ -18,7 +18,7 @@ public class MainLoginPage extends FacebookPage {
 	private By regFemale = By.cssSelector("*[name='sex'][value='1']"); //By.xpath("//*[@name='sex'][@value='1']"); 
 	private By regMale = By.cssSelector("*[name='sex'][value='2']"); //By.xpath("//*[@name='sex'][@value='2']");
 	private By regButton = By.name("websubmit");
-	private By processingRegRequest = By.xpath("//button[@name='websubmit']/following-sibling::span/img");
+	private By regRequestProgressBar = By.xpath("//button[@name='websubmit']/following-sibling::span/img");
 		
 	public MainLoginPage(WebDriver driver) {
 		super(driver);
@@ -33,15 +33,15 @@ public class MainLoginPage extends FacebookPage {
 	}
 	
 	public void setEmailLogin(String text) {
-		setText(this.loginEmail, text);
+		setText(loginEmail, text);
 	}
 	
 	public void setPasswordLogin(String text) {
-		setText(this.loginPassword, text);
+		setText(loginPassword, text);
 	}
 	
 	public void logIn() {
-		click(this.loginButton);
+		click(loginButton);
 	}
 	
 	public void fillRegistrationForm(
@@ -70,10 +70,13 @@ public class MainLoginPage extends FacebookPage {
 	}
 	
 	public void submitRegistration() {
-		click(this.regButton);
+		click(regButton);
 	}
 	
 	public boolean isProcessingRegistrationRequest() {
-		return this.isElementVisible(processingRegRequest, 2l, 200l);
+		final long WAIT_FOR_2SEC = 2l;
+		final long CHECK_EVERY_200MS = 200l;
+		
+		return isElementVisible(regRequestProgressBar, WAIT_FOR_2SEC, CHECK_EVERY_200MS);
 	}
 }

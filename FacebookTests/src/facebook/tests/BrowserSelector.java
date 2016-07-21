@@ -1,6 +1,7 @@
 package facebook.tests;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -14,20 +15,21 @@ public class BrowserSelector {
 	
 	@Test
 	@Parameters({"browser"})
-	public void setBrowserForAllTests(String browser) throws IOException {
-		Properties properties = new Properties();
+	public void setBrowserForAllTests(String browser) {
+		Properties browserProperty = new Properties();
+		browserProperty.setProperty(FactorySelector.BROWSER_PROPERTY_NAME, browser);
+		
+		writeBrowserPropertyToFile(browserProperty);
+	}
+	
+	private void writeBrowserPropertyToFile(Properties browserProperty) {
 		File propertiesFile = new File(FactorySelector.BROWSER_PROPERTIES_FILE);
 		
-		properties.setProperty(FactorySelector.BROWSER_PROPERTY_NAME, browser);
-		
-		FileOutputStream propertiesOutStream = null;
-		try {
-			propertiesOutStream = new FileOutputStream(propertiesFile);
-			properties.store(propertiesOutStream, "The selected browser for the current Facebook Suites execution");
+		try(FileOutputStream propertiesOutStream = new FileOutputStream(propertiesFile)) {
+			browserProperty.store(propertiesOutStream, "The selected browser for the current Facebook Suites execution");
 		}
-		finally {
-			if(propertiesOutStream != null)
-				propertiesOutStream.close();
+		catch(IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
