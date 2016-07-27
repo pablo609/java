@@ -57,19 +57,19 @@ public class MainLoginPageBasicTest {
 		final String defBirthdayYear = "2000";
 		final String defSex = "male";
 		
-		final By leftredWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerLeft");
-		final By belowredWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerBelowLeft");
+		final By leftRedWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerLeft");
+		final By belowRedWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerBelowLeft");
 		
 		return new Object[][] {
-		{ "", defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
-		{ defFirstName, "", defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, belowredWarningNotice },
-		{ defFirstName, defLastName, "", defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
-		{ defFirstName, defLastName, defEmail, "", defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
-		{ defFirstName, defLastName, defEmail, defEmail, "", defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, "0", defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, "0", defBirthdayYear, defSex, leftredWarningNotice },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, "0", defSex, leftredWarningNotice },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, "", leftredWarningNotice },
+		{ "", defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, "", defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, belowRedWarningNotice },
+		{ defFirstName, defLastName, "", defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, "", defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, "", defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, "0", defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, "0", defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, "0", defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, "", leftRedWarningNotice },
 		};
 	}
 
@@ -85,7 +85,7 @@ public class MainLoginPageBasicTest {
 			String regBirthdayMonth,
 			String regBirthdayYear,
 			String regSex,
-			By redwarningNotice) {
+			By redWarningNotice) {
 		
 		page.fillRegistrationForm(
 				regFirstName,
@@ -100,7 +100,7 @@ public class MainLoginPageBasicTest {
 		page.submitRegistration();
 		Assert.assertFalse(page.isProcessingRegistrationRequest());
 		Assert.assertTrue(page.isLoaded());
-		Assert.assertTrue(page.isElementVisible(redwarningNotice));
+		Assert.assertTrue(page.isElementVisible(redWarningNotice));
 		page.load();
 	}
 }

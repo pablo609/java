@@ -7,9 +7,11 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import com.google.common.base.Function;
@@ -22,7 +24,7 @@ public class FacebookPage {
 	
 	public FacebookPage(WebDriver driver) {
 		this.driver = driver;
-		//this.driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		this.driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
 	}
 	
 	public String getPageTitle() {
@@ -89,4 +91,28 @@ public class FacebookPage {
 		
 		return retVal;
 	}
+	
+	protected void setPageLanguagetoUS() {
+		final String LANG_COOKIE_NAME = "locale";
+		final String US_LANG_COOKIE_VALUE = "en_US";
+		final String LANG_COOKIE_DOMAIN = ".facebook.com";
+		final String LANG_COOKIE_PATH = "/";
+		boolean cookieHasToBeUpdated = false;
+		
+		Cookie pageLanguageCookie = driver.manage().getCookieNamed(LANG_COOKIE_NAME);
+		if(pageLanguageCookie == null)
+			cookieHasToBeUpdated = true;
+		else if(pageLanguageCookie.getValue().compareTo(US_LANG_COOKIE_VALUE) != 0)
+			cookieHasToBeUpdated = true;
+
+		if(cookieHasToBeUpdated) {
+			Date currentDate = new Date();
+			long currentTimeInMs = currentDate.getTime();
+			final long FIVE_DAYS_IN_MS = 86400000l;
+			Date cookieExpiryDate = new Date(currentTimeInMs + FIVE_DAYS_IN_MS);
+			pageLanguageCookie = new Cookie(LANG_COOKIE_NAME, US_LANG_COOKIE_VALUE, LANG_COOKIE_DOMAIN, LANG_COOKIE_PATH, cookieExpiryDate);
+			driver.manage().addCookie(pageLanguageCookie);
+			driver.navigate().refresh();
+		}
+	}	
 }

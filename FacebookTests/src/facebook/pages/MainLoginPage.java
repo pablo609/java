@@ -28,6 +28,7 @@ public class MainLoginPage extends FacebookPage {
 	
 	public void load() {
 		driver.get(PAGE_URL);
+		setPageLanguagetoUS();
 	}
 	
 	public boolean isLoaded() {
