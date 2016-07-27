@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends FacebookPage {
 	private static final String PAGE_TITLE = "Log in to Facebook | Facebook";
+	private static final String PAGE_URL = "https://www.facebook.com/login.php";
 	private By badLoginWarningV1 = By.xpath("//div[starts-with(text(),'The email')]");
 	private By badLoginWarningV2 = By.xpath("//div[text() = 'Wrong Credentials']");
 	private By passwordLogin = By.id("pass");
@@ -16,7 +17,7 @@ public class LoginPage extends FacebookPage {
 	}
 	
 	public void load() {
-		driver.get("https://www.facebook.com/login.php");
+		driver.get(PAGE_URL);
 	}
 	
 	public boolean isBadLoginWarning() {

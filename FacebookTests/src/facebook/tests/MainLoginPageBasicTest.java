@@ -1,5 +1,6 @@
 package facebook.tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -47,25 +48,28 @@ public class MainLoginPageBasicTest {
 	
 	@DataProvider(name = "RegistrationData")
 	public Object[][] createRegistrationData() {
-		String defFirstName = "Jan";
-		String defLastName = "Kowalski";
-		String defEmail = "kowalski@onetonet.pl";
-		String defPassword = "Abcd123!";
-		String defBirthdayDay = "1";
-		String defBirthdayMonth = "1";
-		String defBirthdayYear = "2000";
-		String defSex = "male";
+		final String defFirstName = "Jan";
+		final String defLastName = "Kowalski";
+		final String defEmail = "kowalski@onetonet.pl";
+		final String defPassword = "Abcd123!";
+		final String defBirthdayDay = "1";
+		final String defBirthdayMonth = "1";
+		final String defBirthdayYear = "2000";
+		final String defSex = "male";
 		
-	return new Object[][] {
-		{ "", defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, "", defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, "", defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, "", defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, "", defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, "0", defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, "0", defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, "0", defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, "" },
+		final By leftredWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerLeft");
+		final By belowredWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerBelowLeft");
+		
+		return new Object[][] {
+		{ "", defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
+		{ defFirstName, "", defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, belowredWarningNotice },
+		{ defFirstName, defLastName, "", defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
+		{ defFirstName, defLastName, defEmail, "", defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, "", defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, "0", defBirthdayMonth, defBirthdayYear, defSex, leftredWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, "0", defBirthdayYear, defSex, leftredWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, "0", defSex, leftredWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, "", leftredWarningNotice },
 		};
 	}
 
@@ -80,7 +84,8 @@ public class MainLoginPageBasicTest {
 			String regBirthdayDay,
 			String regBirthdayMonth,
 			String regBirthdayYear,
-			String regSex) {
+			String regSex,
+			By redwarningNotice) {
 		
 		page.fillRegistrationForm(
 				regFirstName,
@@ -95,6 +100,7 @@ public class MainLoginPageBasicTest {
 		page.submitRegistration();
 		Assert.assertFalse(page.isProcessingRegistrationRequest());
 		Assert.assertTrue(page.isLoaded());
+		Assert.assertTrue(page.isElementVisible(redwarningNotice));
 		page.load();
 	}
 }

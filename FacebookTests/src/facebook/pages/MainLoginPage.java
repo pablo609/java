@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class MainLoginPage extends FacebookPage {
+	private static final String PAGE_TITLE = "Facebook - Log In or Sign Up";
+	private static final String PAGE_URL = "https://www.facebook.com";
 	private By loginEmail = By.id("email");
 	private By loginPassword = By.id("pass");
 	private By loginButton = By.cssSelector("input[value='Log In']");
@@ -25,11 +27,11 @@ public class MainLoginPage extends FacebookPage {
 	}
 	
 	public void load() {
-		driver.get("https://www.facebook.com");
+		driver.get(PAGE_URL);
 	}
 	
 	public boolean isLoaded() {
-		return getPageTitle().equals("Facebook - Log In or Sign Up");
+		return getPageTitle().equals(PAGE_TITLE);
 	}
 	
 	public void setEmailLogin(String text) {
