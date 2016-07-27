@@ -29,11 +29,8 @@ public class FactorySelector {
 	
 	private static String getBrowserPropertyValueFromFile() {	
 		Properties properties = readBrowserPropertyFromFile();
-			
-		if(properties != null)
-			return properties.getProperty(BROWSER_PROPERTY_NAME);
-		else
-			return null;
+
+		return properties.getProperty(BROWSER_PROPERTY_NAME);
 	}
 	
 	private static Properties readBrowserPropertyFromFile() {
@@ -45,7 +42,6 @@ public class FactorySelector {
 		}
 		catch(IOException e) {
 			e.printStackTrace();
-			properties = null;
 		}
 		
 		return properties;

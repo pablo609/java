@@ -15,7 +15,7 @@ public class BrowserSelector {
 	
 	@Test
 	@Parameters({"browser"})
-	public void setBrowserForAllTests(String browser) {
+	public void setBrowserPropertyValueInFile(String browser) {
 		Properties browserProperty = new Properties();
 		browserProperty.setProperty(FactorySelector.BROWSER_PROPERTY_NAME, browser);
 		

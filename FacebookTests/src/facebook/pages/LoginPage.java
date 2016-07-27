@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends FacebookPage {
+	private static final String PAGE_TITLE = "Log in to Facebook | Facebook";
 	private By badLoginWarningV1 = By.xpath("//div[starts-with(text(),'The email')]");
 	private By badLoginWarningV2 = By.xpath("//div[text() = 'Wrong Credentials']");
 	private By passwordLogin = By.id("pass");
@@ -26,7 +27,7 @@ public class LoginPage extends FacebookPage {
 	}
 	
 	public boolean isLoaded() {
-		return getPageTitle().equals("Log into Facebook | Facebook");
+		return getPageTitle().equals(PAGE_TITLE);
 	}
 	
 	public void setPasswordLogin(String text) {
