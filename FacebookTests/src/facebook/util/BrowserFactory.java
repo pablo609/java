@@ -8,10 +8,10 @@ public abstract class BrowserFactory {
 	public abstract WebDriver createWebDriver();
 	
 	public MainLoginPage createMainLoginPage(WebDriver driver) {
-		return new MainLoginPage(driver);
+		return new MainLoginPage(new CommonWebDriverInterface(driver));
 	}
 	
 	public LoginPage createLoginPage(WebDriver driver) {
-		return new LoginPage(driver);
+		return new LoginPage(new CommonWebDriverInterface(driver));
 	}
 }

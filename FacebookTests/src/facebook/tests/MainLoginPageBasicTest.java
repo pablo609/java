@@ -1,6 +1,7 @@
 package facebook.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -23,12 +24,12 @@ public class MainLoginPageBasicTest {
 		factory = FactorySelector.getBrowserFactory();
 		driver = factory.createWebDriver();
 		page = factory.createMainLoginPage(driver);
-		page.load();
+		page.configureCookieAndLoad();
 	}
 	
 	@AfterTest
 	public void cleanup() {
-		driver.close();
+		page.close();
 	}
 	
 	@Test
@@ -101,6 +102,6 @@ public class MainLoginPageBasicTest {
 		Assert.assertFalse(page.isProcessingRegistrationRequest());
 		Assert.assertTrue(page.isLoaded());
 		Assert.assertTrue(page.isElementVisible(redWarningNotice));
-		page.load();
+		page.load();	
 	}
 }

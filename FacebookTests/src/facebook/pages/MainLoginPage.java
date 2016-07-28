@@ -1,7 +1,8 @@
 package facebook.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import facebook.util.WebDriverInterface;
 
 public class MainLoginPage extends FacebookPage {
 	private static final String PAGE_TITLE = "Facebook - Log In or Sign Up";
@@ -22,13 +23,18 @@ public class MainLoginPage extends FacebookPage {
 	private By regButton = By.name("websubmit");
 	private By regRequestProgressBar = By.xpath("//button[@name='websubmit']/following-sibling::span/img");
 		
-	public MainLoginPage(WebDriver driver) {
-		super(driver);
+	public MainLoginPage(WebDriverInterface driverInterface) {
+		super(driverInterface);
+	}
+	
+	public void configureCookieAndLoad() {
+		driverInterface.loadPage(PAGE_URL);
+		setPageLanguageCookietoUS();
+		driverInterface.refreshPage();
 	}
 	
 	public void load() {
-		driver.get(PAGE_URL);
-		setPageLanguagetoUS();
+		driverInterface.loadPage(PAGE_URL);
 	}
 	
 	public boolean isLoaded() {

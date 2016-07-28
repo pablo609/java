@@ -1,118 +1,78 @@
 package facebook.pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
-import com.google.common.base.Function;
-
-
-
+import facebook.util.WebDriverInterface;
 
 public class FacebookPage {
-	protected WebDriver driver;
+	protected WebDriverInterface driverInterface;
 	
-	public FacebookPage(WebDriver driver) {
-		this.driver = driver;
-		this.driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+	public FacebookPage(WebDriverInterface driverInterface) {
+		this.driverInterface = driverInterface;
 	}
 	
 	public String getPageTitle() {
-		return driver.getTitle();
+		return driverInterface.getPageTitle();
 	}
 	
-	public void setText(By element, String text) {
-		WebElement tmpElement = driver.findElement(element);
-		tmpElement.clear();
-		tmpElement.sendKeys(text);
+	public void setText(By locator, String text) {
+		driverInterface.setText(locator, text);
 	}
 	
-	public void click(By element) {
-		driver.findElement(element).click();	
+	public void click(By locator) {
+		driverInterface.click(locator);
 	}
 	
-	public boolean isElementPresent(By element) {
-		if(driver.findElements(element).size() == 0)
-			return false;
-		else
-			return true;
+	public boolean isElementPresent(By locator) {
+		return driverInterface.isElementPresent(locator);
 	}
 	
-	public void selectOption(By element, String option) {
-		Select tmp = new Select(driver.findElement(element));
-		tmp.selectByValue(option);
+	public void selectOption(By locator, String option) {
+		driverInterface.selectOption(locator, option);
 	}
 	
-	public boolean isElementVisible(By element) {
-		return driver.findElement(element).isDisplayed();
+	public boolean isElementVisible(By locator) {
+		return driverInterface.isElementVisible(locator);
 	}
 	
-	public boolean isElementVisible(By element, Long timeoutInSec) {
-		boolean retVal = true;
-		
-		try {
-			WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
-			wait.until(ExpectedConditions.visibilityOfElementLocated(element));
-		}
-		catch(TimeoutException e) {
-			retVal = false;
-		}
-		
-		return retVal;
+	public boolean isElementVisible(By locator, Long timeoutInSec) {
+		return driverInterface.isElementVisible(locator, timeoutInSec);
 	}
 	
-	public boolean isElementVisible(By element, Long timeoutInSec, Long pollingIntervalInMSec) {
-		boolean retVal = true;
-		
-		try {
-			new FluentWait<WebDriver>(driver)							
-				.withTimeout(timeoutInSec, TimeUnit.SECONDS) 			
-				.pollingEvery(pollingIntervalInMSec, TimeUnit.MILLISECONDS) 			
-				.ignoring(NoSuchElementException.class)
-				.until(new Function<WebDriver, Boolean>() {							
-					public Boolean apply(WebDriver driver) { 
-						return driver.findElement(element).isDisplayed();					
-					}		
-				});
-		}
-		catch(TimeoutException e) {
-			retVal = false;
-		}
-		
-		return retVal;
+	public boolean isElementVisible(By locator, Long timeoutInSec, Long pollingIntervalInMSec) {
+		return driverInterface.isElementVisible(locator, timeoutInSec, pollingIntervalInMSec);
 	}
 	
-	protected void setPageLanguagetoUS() {
+	protected void setPageLanguageCookietoUS() {
 		final String LANG_COOKIE_NAME = "locale";
 		final String US_LANG_COOKIE_VALUE = "en_US";
 		final String LANG_COOKIE_DOMAIN = ".facebook.com";
 		final String LANG_COOKIE_PATH = "/";
-		boolean cookieHasToBeUpdated = false;
-		
-		Cookie pageLanguageCookie = driver.manage().getCookieNamed(LANG_COOKIE_NAME);
-		if(pageLanguageCookie == null)
-			cookieHasToBeUpdated = true;
-		else if(pageLanguageCookie.getValue().compareTo(US_LANG_COOKIE_VALUE) != 0)
-			cookieHasToBeUpdated = true;
 
-		if(cookieHasToBeUpdated) {
+		if( ! isCookieConfiguredToValue(LANG_COOKIE_NAME, US_LANG_COOKIE_VALUE)) {
 			Date currentDate = new Date();
 			long currentTimeInMs = currentDate.getTime();
 			final long FIVE_DAYS_IN_MS = 86400000l;
 			Date cookieExpiryDate = new Date(currentTimeInMs + FIVE_DAYS_IN_MS);
-			pageLanguageCookie = new Cookie(LANG_COOKIE_NAME, US_LANG_COOKIE_VALUE, LANG_COOKIE_DOMAIN, LANG_COOKIE_PATH, cookieExpiryDate);
-			driver.manage().addCookie(pageLanguageCookie);
-			driver.navigate().refresh();
+			Cookie pageLanguageCookie = new Cookie(LANG_COOKIE_NAME, US_LANG_COOKIE_VALUE, LANG_COOKIE_DOMAIN, LANG_COOKIE_PATH, cookieExpiryDate);
+			driverInterface.addCookie(pageLanguageCookie);
 		}
-	}	
+	}
+	
+	private boolean isCookieConfiguredToValue(String cookieName, String cookieVlue) {
+		Cookie cookie = driverInterface.getCookieNamed(cookieName);
+		if(cookie == null)
+			return false;
+		else if(cookie.getValue().compareTo(cookieVlue) != 0)
+			return false;
+		
+		return true;
+	}
+	
+	public void close() {
+		driverInterface.closePage();
+	}
 }

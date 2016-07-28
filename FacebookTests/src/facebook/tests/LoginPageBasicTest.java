@@ -20,12 +20,12 @@ public class LoginPageBasicTest {
 		factory = FactorySelector.getBrowserFactory();
 		driver = factory.createWebDriver();
 		page = factory.createLoginPage(driver);
-		page.load();
+		page.configureCookieAndLoad();
 	}
 	
 	@AfterTest
 	public void cleanup() {
-		driver.close();
+		page.close();
 	}
 	
 	@Test

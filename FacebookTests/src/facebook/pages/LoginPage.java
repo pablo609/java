@@ -1,7 +1,8 @@
 package facebook.pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import facebook.util.WebDriverInterface;
 
 public class LoginPage extends FacebookPage {
 	private static final String PAGE_TITLE = "Log into Facebook | Facebook";
@@ -12,13 +13,18 @@ public class LoginPage extends FacebookPage {
 	private By emailLogin = By.id("email");
 	private By loginButton = By.cssSelector("button[id='loginbutton']");
 			
-	public LoginPage(WebDriver driver) {
-		super(driver);
+	public LoginPage(WebDriverInterface driverInterface) {
+		super(driverInterface);
+	}
+	
+	public void configureCookieAndLoad() {
+		driverInterface.loadPage(PAGE_URL);
+		setPageLanguageCookietoUS();
+		driverInterface.refreshPage();
 	}
 	
 	public void load() {
-		driver.get(PAGE_URL);
-		setPageLanguagetoUS();
+		driverInterface.loadPage(PAGE_URL);
 	}
 	
 	public boolean isBadLoginWarning() {
