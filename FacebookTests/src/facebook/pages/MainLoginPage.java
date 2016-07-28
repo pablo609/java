@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class MainLoginPage extends FacebookPage {
+	private static final String PAGE_TITLE = "Facebook - Log In or Sign Up";
+	private static final String PAGE_URL = "https://www.facebook.com";
 	private By loginEmail = By.id("email");
 	private By loginPassword = By.id("pass");
 	private By loginButton = By.cssSelector("input[value='Log In']");
@@ -14,34 +16,35 @@ public class MainLoginPage extends FacebookPage {
 	private By regPassword = By.name("reg_passwd__");
 	private By regBirthdayDay = By.name("birthday_day");
 	private By regBirthdayMonth = By.name("birthday_month");
-	private By regBirthdayYear = By.name("birthday_year");
-	private By regFemale = By.xpath("//*[@name='sex'][@value='1']");
-	private By regMale = By.xpath("//*[@name='sex'][@value='2']");
+	private By regBirthdayYear = By.name("birthday_year"); 
+	private By regFemale = By.cssSelector("*[name='sex'][value='1']"); //By.xpath("//*[@name='sex'][@value='1']"); 
+	private By regMale = By.cssSelector("*[name='sex'][value='2']"); //By.xpath("//*[@name='sex'][@value='2']");
 	private By regButton = By.name("websubmit");
-	private By processingRegRequest = By.xpath("//button[@name='websubmit']/following-sibling::span/img");
-	
+	private By regRequestProgressBar = By.xpath("//button[@name='websubmit']/following-sibling::span/img");
+		
 	public MainLoginPage(WebDriver driver) {
 		super(driver);
 	}
 	
 	public void load() {
-		driver.get("https://www.facebook.com");
+		driver.get(PAGE_URL);
+		setPageLanguagetoUS();
 	}
 	
 	public boolean isLoaded() {
-		return getPageTitle().equals("Facebook - Log In or Sign Up");
+		return getPageTitle().equals(PAGE_TITLE);
 	}
 	
 	public void setEmailLogin(String text) {
-		setText(this.loginEmail, text);
+		setText(loginEmail, text);
 	}
 	
 	public void setPasswordLogin(String text) {
-		setText(this.loginPassword, text);
+		setText(loginPassword, text);
 	}
 	
 	public void logIn() {
-		click(this.loginButton);
+		click(loginButton);
 	}
 	
 	public void fillRegistrationForm(
@@ -70,10 +73,13 @@ public class MainLoginPage extends FacebookPage {
 	}
 	
 	public void submitRegistration() {
-		click(this.regButton);
+		click(regButton);
 	}
 	
 	public boolean isProcessingRegistrationRequest() {
-		return this.isElementVisible(processingRegRequest, 2l, 200l);
+		final long WAIT_FOR_2SEC = 2l;
+		final long CHECK_EVERY_200MS = 200l;
+		
+		return isElementVisible(regRequestProgressBar, WAIT_FOR_2SEC, CHECK_EVERY_200MS);
 	}
 }

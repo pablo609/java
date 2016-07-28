@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="FacebookSuite" verbose="1" parallel="tests" thread-count="1">
+	<test name="BrowserSelection">
+    	<classes>
+       		<class name="facebook.tests.BrowserSelector" />
+    	</classes>
+  	</test>
 	<test name="MainLoginPageTest">
     	<classes>
        		<class name="facebook.tests.MainLoginPageBasicTest" />

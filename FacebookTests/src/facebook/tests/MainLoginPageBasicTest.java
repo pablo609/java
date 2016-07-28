@@ -1,5 +1,6 @@
 package facebook.tests;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -10,15 +11,16 @@ import org.testng.annotations.Test;
 import facebook.pages.LoginPage;
 import facebook.pages.MainLoginPage;
 import facebook.util.BrowserFactory;
-import facebook.util.FirefoxFactory;
+import facebook.util.FactorySelector;
 
 public class MainLoginPageBasicTest {
-	BrowserFactory factory = FirefoxFactory.getInstance();
+	BrowserFactory factory = null;
 	WebDriver driver = null;
 	MainLoginPage page = null;
 	
 	@BeforeTest
 	public void setup() {
+		factory = FactorySelector.getBrowserFactory();
 		driver = factory.createWebDriver();
 		page = factory.createMainLoginPage(driver);
 		page.load();
@@ -35,36 +37,39 @@ public class MainLoginPageBasicTest {
 	}
 	
 	@Test
-	public void verifyMainLoginPageBadLogin() {
+	public void verifyMainLoginPageBadLogin() throws InterruptedException {
 		page.setEmailLogin("wronglogin");
 		page.setPasswordLogin("wrongpass");
 		page.logIn();
-		LoginPage tmpPage = factory.createLoginPage(driver);
-		Assert.assertTrue(tmpPage.isLoaded());
+		LoginPage nextPage = factory.createLoginPage(driver);
+		Assert.assertTrue(nextPage.isLoaded());
 		page.load();
 	}
 	
 	@DataProvider(name = "RegistrationData")
 	public Object[][] createRegistrationData() {
-		String defFirstName = "Jan";
-		String defLastName = "Kowalski";
-		String defEmail = "kowalski@onetonet.pl";
-		String defPassword = "Abcd123!";
-		String defBirthdayDay = "1";
-		String defBirthdayMonth = "1";
-		String defBirthdayYear = "2000";
-		String defSex = "male";
+		final String defFirstName = "Jan";
+		final String defLastName = "Kowalski";
+		final String defEmail = "kowalski@onetonet.pl";
+		final String defPassword = "Abcd123!";
+		final String defBirthdayDay = "1";
+		final String defBirthdayMonth = "1";
+		final String defBirthdayYear = "2000";
+		final String defSex = "male";
 		
-	return new Object[][] {
-		{ "", defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, "", defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, "", defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, "", defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, "", defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, "0", defBirthdayMonth, defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, "0", defBirthdayYear, defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, "0", defSex },
-		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, "" },
+		final By leftRedWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerLeft");
+		final By belowRedWarningNotice = By.cssSelector(".uiContextualLayer.uiContextualLayerBelowLeft");
+		
+		return new Object[][] {
+		{ "", defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, "", defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, belowRedWarningNotice },
+		{ defFirstName, defLastName, "", defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, "", defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, "", defBirthdayDay, defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, "0", defBirthdayMonth, defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, "0", defBirthdayYear, defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, "0", defSex, leftRedWarningNotice },
+		{ defFirstName, defLastName, defEmail, defEmail, defPassword, defBirthdayDay, defBirthdayMonth, defBirthdayYear, "", leftRedWarningNotice },
 		};
 	}
 
@@ -79,7 +84,8 @@ public class MainLoginPageBasicTest {
 			String regBirthdayDay,
 			String regBirthdayMonth,
 			String regBirthdayYear,
-			String regSex) {
+			String regSex,
+			By redWarningNotice) {
 		
 		page.fillRegistrationForm(
 				regFirstName,
@@ -94,6 +100,7 @@ public class MainLoginPageBasicTest {
 		page.submitRegistration();
 		Assert.assertFalse(page.isProcessingRegistrationRequest());
 		Assert.assertTrue(page.isLoaded());
+		Assert.assertTrue(page.isElementVisible(redWarningNotice));
 		page.load();
 	}
 }

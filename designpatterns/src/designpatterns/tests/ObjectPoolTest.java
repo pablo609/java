@@ -1,4 +1,4 @@
-package designpatterns;
+package designpatterns.tests;
 
 import java.util.LinkedList;
 
