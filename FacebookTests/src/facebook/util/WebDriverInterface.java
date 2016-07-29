@@ -10,8 +10,8 @@ public interface WebDriverInterface {
 	boolean isElementPresent(By locator);
 	void selectOption(By locator, String option);
 	boolean isElementVisible(By locator);
-	boolean isElementVisible(By locator, Long timeoutInSec);
-	boolean isElementVisible(By locator, Long timeoutInSec, Long pollingIntervalInMSec);
+	boolean isElementVisible(By locator, long timeoutInSec);
+	boolean isElementVisible(By locator, long timeoutInSec, long pollingIntervalInMSec);
 	Cookie getCookieNamed(String cookieName);
 	void addCookie(Cookie cookie);
 	void refreshPage();

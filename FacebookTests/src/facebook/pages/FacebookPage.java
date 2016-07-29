@@ -38,11 +38,11 @@ public class FacebookPage {
 		return driverInterface.isElementVisible(locator);
 	}
 	
-	public boolean isElementVisible(By locator, Long timeoutInSec) {
+	public boolean isElementVisible(By locator, long timeoutInSec) {
 		return driverInterface.isElementVisible(locator, timeoutInSec);
 	}
 	
-	public boolean isElementVisible(By locator, Long timeoutInSec, Long pollingIntervalInMSec) {
+	public boolean isElementVisible(By locator, long timeoutInSec, long pollingIntervalInMSec) {
 		return driverInterface.isElementVisible(locator, timeoutInSec, pollingIntervalInMSec);
 	}
 	
@@ -51,7 +51,6 @@ public class FacebookPage {
 		final String US_LANG_COOKIE_VALUE = "en_US";
 		final String LANG_COOKIE_DOMAIN = ".facebook.com";
 		final String LANG_COOKIE_PATH = "/";
-
 		if( ! isCookieConfiguredToValue(LANG_COOKIE_NAME, US_LANG_COOKIE_VALUE)) {
 			Date currentDate = new Date();
 			long currentTimeInMs = currentDate.getTime();

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class ChromeWebDriverInterface extends CommonWebDriverInterface {
+	private static final String DRIVER_PROCESS_NAME = "chromedriver";
 	
 	public ChromeWebDriverInterface(WebDriver driver) {
 		super(driver);
@@ -26,15 +27,11 @@ public class ChromeWebDriverInterface extends CommonWebDriverInterface {
 	
 	@Override
 	public void closePage() {
-		//TODO:This is a workaround for an issue with ChormeDrive process not being closed after calling close method
-		//It still doesn't work
-		//Check the same issue with IE
-		try {
-			Thread.sleep(3000);
-		}
-		catch(InterruptedException e) {
-			e.printStackTrace();
-		}
 		driver.close();
+		
+		//This is a workaround for an issue with ChormeDrive process not being closed after calling close method
+		if(ProcessManager.isProcessRunning(DRIVER_PROCESS_NAME)) {
+			ProcessManager.killAllInstancesOfProcess(DRIVER_PROCESS_NAME);
+		}
 	}
 }

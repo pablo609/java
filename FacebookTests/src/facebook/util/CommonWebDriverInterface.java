@@ -52,7 +52,7 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 		return driver.findElement(locator).isDisplayed();
 	}
 	
-	public boolean isElementVisible(By locator, Long timeoutInSec) {
+	public boolean isElementVisible(By locator, long timeoutInSec) {
 		boolean retVal = true;
 		
 		try {
@@ -66,7 +66,7 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 		return retVal;
 	}
 	
-	public boolean isElementVisible(By locator, Long timeoutInSec, Long pollingIntervalInMSec) {
+	public boolean isElementVisible(final By locator, long timeoutInSec, long pollingIntervalInMSec) {
 		boolean retVal = true;
 		
 		try {
@@ -104,6 +104,6 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 	}
 	
 	public void closePage() {
-		driver.close();
+		driver.quit();
 	}
 }
