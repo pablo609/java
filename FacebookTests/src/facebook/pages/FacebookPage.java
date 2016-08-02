@@ -7,8 +7,31 @@ import java.util.Date;
 
 import facebook.util.WebDriverInterface;
 
-public class FacebookPage {
+public abstract class FacebookPage {
 	protected WebDriverInterface driverInterface;
+	private static final Cookie LANG_COOKIE;
+	private static final Cookie LOGIN_COOKIE;
+	static
+	{
+		final String LANG_COOKIE_NAME = "locale";
+		final String LANG_COOKIE_VALUE = "en_US";
+		final String LOGIN_COOKIE_NAME = "c_user";
+		final String LOGIN_COOKIE_VALUE = "100012767310085";
+		final String COOKIE_DOMAIN = ".facebook.com";
+		final String COOKIE_PATH = "/";
+		final boolean SECURE_COOKIE = true;
+		Date currentDate = new Date();
+		long currentTimeInMs = currentDate.getTime();
+		final long THIRTY_DAYS_IN_MS = 86400000l * 30l;
+		Date cookieExpiryDate = new Date(currentTimeInMs + THIRTY_DAYS_IN_MS);
+		
+		LANG_COOKIE = new Cookie(LANG_COOKIE_NAME, LANG_COOKIE_VALUE, COOKIE_DOMAIN, COOKIE_PATH, cookieExpiryDate);
+		LOGIN_COOKIE = new Cookie(LOGIN_COOKIE_NAME, LOGIN_COOKIE_VALUE, COOKIE_DOMAIN, COOKIE_PATH, cookieExpiryDate, SECURE_COOKIE);
+	}
+	
+	public abstract boolean isLoaded();
+	public abstract void configureCookieAndLoad();
+	public abstract void load();
 	
 	public FacebookPage(WebDriverInterface driverInterface) {
 		this.driverInterface = driverInterface;
@@ -46,18 +69,21 @@ public class FacebookPage {
 		return driverInterface.isElementVisible(locator, timeoutInSec, pollingIntervalInMSec);
 	}
 	
-	protected void setPageLanguageCookietoUS() {
-		final String LANG_COOKIE_NAME = "locale";
-		final String US_LANG_COOKIE_VALUE = "en_US";
-		final String LANG_COOKIE_DOMAIN = ".facebook.com";
-		final String LANG_COOKIE_PATH = "/";
-		if( ! isCookieConfiguredToValue(LANG_COOKIE_NAME, US_LANG_COOKIE_VALUE)) {
-			Date currentDate = new Date();
-			long currentTimeInMs = currentDate.getTime();
-			final long FIVE_DAYS_IN_MS = 86400000l;
-			Date cookieExpiryDate = new Date(currentTimeInMs + FIVE_DAYS_IN_MS);
-			Cookie pageLanguageCookie = new Cookie(LANG_COOKIE_NAME, US_LANG_COOKIE_VALUE, LANG_COOKIE_DOMAIN, LANG_COOKIE_PATH, cookieExpiryDate);
-			driverInterface.addCookie(pageLanguageCookie);
+	public void setLanguageCookietoUS() {
+		if( ! isCookieConfiguredToValue(LANG_COOKIE.getName(), LANG_COOKIE.getValue())) {
+			driverInterface.addCookie(LANG_COOKIE);
+		}
+	}
+	
+	public void setLoginCookie() {
+		if( ! isCookieConfiguredToAnyValue(LOGIN_COOKIE.getName())) {
+			driverInterface.addCookie(LANG_COOKIE);
+		}
+	}
+	
+	public void clearLoginCookie() {
+		if(isCookieConfiguredToAnyValue(LOGIN_COOKIE.getName())) {
+			driverInterface.delCookieNamed(LOGIN_COOKIE.getName());
 		}
 	}
 	
@@ -66,6 +92,14 @@ public class FacebookPage {
 		if(cookie == null)
 			return false;
 		else if(cookie.getValue().compareTo(cookieVlue) != 0)
+			return false;
+		
+		return true;
+	}
+	
+	private boolean isCookieConfiguredToAnyValue(String cookieName) {
+		Cookie cookie = driverInterface.getCookieNamed(cookieName);
+		if(cookie == null)
 			return false;
 		
 		return true;

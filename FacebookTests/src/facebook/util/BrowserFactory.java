@@ -14,4 +14,8 @@ public abstract class BrowserFactory {
 	public LoginPage createLoginPage(WebDriver driver) {
 		return new LoginPage(new CommonWebDriverInterface(driver));
 	}
+	
+	public MainPage createMainPage(WebDriver driver) {
+		return new MainPage(new CommonWebDriverInterface(driver));
+	}
 }

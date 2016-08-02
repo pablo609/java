@@ -66,7 +66,7 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 		return retVal;
 	}
 	
-	public boolean isElementVisible(final By locator, long timeoutInSec, long pollingIntervalInMSec) {
+	public boolean isElementVisible(By locator, long timeoutInSec, long pollingIntervalInMSec) {
 		boolean retVal = true;
 		
 		try {
@@ -93,6 +93,10 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 	
 	public void addCookie(Cookie cookie) {
 		driver.manage().addCookie(cookie);
+	}
+	
+	public void delCookieNamed(String name) {
+		driver.manage().deleteCookieNamed(name);
 	}
 	
 	public void refreshPage() {

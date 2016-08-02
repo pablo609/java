@@ -14,6 +14,7 @@ public interface WebDriverInterface {
 	boolean isElementVisible(By locator, long timeoutInSec, long pollingIntervalInMSec);
 	Cookie getCookieNamed(String cookieName);
 	void addCookie(Cookie cookie);
+	void delCookieNamed(String name);
 	void refreshPage();
 	void loadPage(String url);
 	void closePage();
