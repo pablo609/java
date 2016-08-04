@@ -14,11 +14,7 @@ public class Sandbox {
 		
 		driver.get("https://www.facebook.com/");
 		
-		System.out.println(driver.manage().getCookieNamed("c_user"));
 		
-		driver.manage().deleteCookieNamed("c_user");
-		
-		driver.get("https://www.facebook.com/");
 	}
 
 }

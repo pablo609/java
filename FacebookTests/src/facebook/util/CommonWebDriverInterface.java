@@ -1,5 +1,6 @@
 package facebook.util;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -109,5 +110,9 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 	
 	public void closePage() {
 		driver.quit();
+	}
+	
+	public List<WebElement> findAllElements(By locator) {
+		return driver.findElements(locator);
 	}
 }

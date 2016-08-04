@@ -1,6 +1,9 @@
 package facebook.tests;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -29,8 +32,16 @@ public class MainPageSearchTest {
 	}
 	
 	@Test
-	public void f() {
+	public void verifySearchingForName() throws InterruptedException {
+		final String searchName = "Jan Kowalski";
 		Assert.assertTrue(page.isLoaded());
-		page.setSearchInput("Jan Kowalski");
+		page.setSearchInput(searchName);
+		page.clickSearch();
+		page.waitForSeeMoreSearchAndClick();
+		List<WebElement> searchResult = page.waitForMoreSearchResultAndFindAllElements();
+		Assert.assertFalse(searchResult.isEmpty());
+		for(WebElement element : searchResult) {
+			Assert.assertTrue(element.getText().contains(searchName));
+		}
 	}
 }

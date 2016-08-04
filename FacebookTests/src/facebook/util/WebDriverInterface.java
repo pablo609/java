@@ -1,7 +1,10 @@
 package facebook.util;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.WebElement;
 
 public interface WebDriverInterface {
 	String getPageTitle();
@@ -18,4 +21,5 @@ public interface WebDriverInterface {
 	void refreshPage();
 	void loadPage(String url);
 	void closePage();
+	List<WebElement> findAllElements(By locator);
 }
