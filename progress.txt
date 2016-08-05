@@ -2,7 +2,7 @@
 http://www.guru99.com/selenium-tutorial.html
 
 [java]
-http://www.tutorialspoint.com/java/java_questions_answers.htm
+http://www.tutorialspoint.com/java/java_questions_answers.htm_test
 http://www.tutorialspoint.com/java/java_regular_expressions.htm
 
 [design patterns]
