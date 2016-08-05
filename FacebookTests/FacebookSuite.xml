@@ -16,4 +16,9 @@
        		<class name="facebook.tests.LoginPageBasicTest" />
     	</classes>
   	</test>
+  	<test name="MainPageTest">
+    	<classes>
+       		<class name="facebook.tests.MainPageSearchTest" />
+    	</classes>
+  	</test>
 </suite>

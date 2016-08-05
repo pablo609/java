@@ -1,5 +1,6 @@
 package facebook.util;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -66,7 +67,7 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 		return retVal;
 	}
 	
-	public boolean isElementVisible(final By locator, long timeoutInSec, long pollingIntervalInMSec) {
+	public boolean isElementVisible(By locator, long timeoutInSec, long pollingIntervalInMSec) {
 		boolean retVal = true;
 		
 		try {
@@ -95,6 +96,10 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 		driver.manage().addCookie(cookie);
 	}
 	
+	public void delCookieNamed(String name) {
+		driver.manage().deleteCookieNamed(name);
+	}
+	
 	public void refreshPage() {
 		driver.navigate().refresh();
 	}
@@ -105,5 +110,9 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 	
 	public void closePage() {
 		driver.quit();
+	}
+	
+	public List<WebElement> findAllElements(By locator) {
+		return driver.findElements(locator);
 	}
 }
