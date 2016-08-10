@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class FactorySelector {
 	public static final String BROWSER_PROPERTY_NAME = "browser";
-	public static final String BROWSER_PROPERTIES_FILE = "browser.properties";
+	public static final String BROWSER_PROPERTIES_FILE = "data\\browser.properties";
 	private static final HashMap<String, BrowserFactory> browserFactories = new HashMap<String, BrowserFactory>();
 	static
 	{

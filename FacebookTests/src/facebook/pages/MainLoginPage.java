@@ -29,8 +29,7 @@ public class MainLoginPage extends FacebookPage {
 	
 	public void configureCookieAndLoad() {
 		driverInterface.loadPage(PAGE_URL);
-		clearLoginCookie();
-		setLanguageCookietoUS();
+		setLogoutCookie();
 		driverInterface.loadPage(PAGE_URL);
 	}
 	

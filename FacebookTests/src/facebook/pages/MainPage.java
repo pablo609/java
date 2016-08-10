@@ -1,10 +1,13 @@
 package facebook.pages;
 
+import java.io.File;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebElement;
 
+import facebook.util.Serialization;
 import facebook.util.WebDriverInterface;
 
 public class MainPage extends FacebookPage {
@@ -12,6 +15,7 @@ public class MainPage extends FacebookPage {
 	private static final String PAGE_URL = "https://www.facebook.com";
 	private static final long WAIT_FOR_10SEC = 10l;
 	private static final long CHECK_EVERY_500MS = 500l;
+	private static final String LOGIN_COOKIE_NAME = "datr";
 	
 	private By searchInput = By.cssSelector("input[name='q'][role='combobox']"); //By.xpath("//input[@name='q'][@role='combobox']");
 	private By searchButton = By.cssSelector("form[action$='direct_search.php']>button"); //By.xpath("//form[contains(@action,'direct_search.php')]/child::button"); 
@@ -29,7 +33,6 @@ public class MainPage extends FacebookPage {
 	public void configureCookieAndLoad() {
 		driverInterface.loadPage(PAGE_URL);
 		setLoginCookie();
-		setLanguageCookietoUS();
 		driverInterface.loadPage(PAGE_URL);
 	}
 	
@@ -53,5 +56,11 @@ public class MainPage extends FacebookPage {
 	public List<WebElement> waitForMoreSearchResultAndFindAllElements() {	
 		isElementVisible(searchedElementNamePattern, WAIT_FOR_10SEC, CHECK_EVERY_500MS);
 		return driverInterface.findAllElements(searchedElementNamePattern);
+	}
+	
+	//TODO try to change it to readAllCookies not only the datr and see if it will work
+	public void readAndStoreLoginCookie() {
+		Cookie cookie = driverInterface.getCookieNamed(LOGIN_COOKIE_NAME);
+		Serialization.writeObjectToFile(cookie, LOGIN_COOKIE_DIR + LOGIN_COOKIE_NAME + ".ser");
 	}
 }

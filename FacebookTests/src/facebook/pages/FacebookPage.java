@@ -3,31 +3,15 @@ package facebook.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 
-import java.util.Date;
+import java.io.File;
 
+import facebook.util.Serialization;
 import facebook.util.WebDriverInterface;
 
 public abstract class FacebookPage {
 	protected WebDriverInterface driverInterface;
-	private static final Cookie LANG_COOKIE;
-	private static final Cookie LOGIN_COOKIE;
-	static
-	{
-		final String LANG_COOKIE_NAME = "locale";
-		final String LANG_COOKIE_VALUE = "en_US";
-		final String LOGIN_COOKIE_NAME = "c_user";
-		final String LOGIN_COOKIE_VALUE = "100012767310085";
-		final String COOKIE_DOMAIN = ".facebook.com";
-		final String COOKIE_PATH = "/";
-		final boolean SECURE_COOKIE = true;
-		Date currentDate = new Date();
-		long currentTimeInMs = currentDate.getTime();
-		final long THIRTY_DAYS_IN_MS = 86400000l * 30l;
-		Date cookieExpiryDate = new Date(currentTimeInMs + THIRTY_DAYS_IN_MS);
-		
-		LANG_COOKIE = new Cookie(LANG_COOKIE_NAME, LANG_COOKIE_VALUE, COOKIE_DOMAIN, COOKIE_PATH, cookieExpiryDate);
-		LOGIN_COOKIE = new Cookie(LOGIN_COOKIE_NAME, LOGIN_COOKIE_VALUE, COOKIE_DOMAIN, COOKIE_PATH, cookieExpiryDate, SECURE_COOKIE);
-	}
+	protected static final String LOGIN_COOKIE_DIR = "data\\logincookie\\";
+	protected static final String LOGOUT_COOKIE_DIR = "data\\logoutcookie\\";
 	
 	public abstract boolean isLoaded();
 	public abstract void configureCookieAndLoad();
@@ -69,40 +53,25 @@ public abstract class FacebookPage {
 		return driverInterface.isElementVisible(locator, timeoutInSec, pollingIntervalInMSec);
 	}
 	
-	public void setLanguageCookietoUS() {
-		if( ! isCookieConfiguredToValue(LANG_COOKIE.getName(), LANG_COOKIE.getValue())) {
-			driverInterface.addCookie(LANG_COOKIE);
-		}
-	}
 	
 	public void setLoginCookie() {
-		if( ! isCookieConfiguredToAnyValue(LOGIN_COOKIE.getName())) {
-			driverInterface.addCookie(LANG_COOKIE);
+		File dir = new File(LOGIN_COOKIE_DIR);
+		File[] files = dir.listFiles();
+		driverInterface.delAllCookies();
+		for(File file : files) {
+			Cookie cookie = (Cookie) Serialization.readObjectFromFile(file.getPath());
+			driverInterface.addCookie(cookie);
 		}
 	}
 	
-	public void clearLoginCookie() {
-		if(isCookieConfiguredToAnyValue(LOGIN_COOKIE.getName())) {
-			driverInterface.delCookieNamed(LOGIN_COOKIE.getName());
+	public void setLogoutCookie() {
+		File dir = new File(LOGOUT_COOKIE_DIR);
+		File[] files = dir.listFiles();
+		driverInterface.delAllCookies();
+		for(File file : files) {
+			Cookie cookie = (Cookie) Serialization.readObjectFromFile(file.getPath());
+			driverInterface.addCookie(cookie);
 		}
-	}
-	
-	private boolean isCookieConfiguredToValue(String cookieName, String cookieVlue) {
-		Cookie cookie = driverInterface.getCookieNamed(cookieName);
-		if(cookie == null)
-			return false;
-		else if(cookie.getValue().compareTo(cookieVlue) != 0)
-			return false;
-		
-		return true;
-	}
-	
-	private boolean isCookieConfiguredToAnyValue(String cookieName) {
-		Cookie cookie = driverInterface.getCookieNamed(cookieName);
-		if(cookie == null)
-			return false;
-		
-		return true;
 	}
 	
 	public void close() {

@@ -96,8 +96,8 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 		driver.manage().addCookie(cookie);
 	}
 	
-	public void delCookieNamed(String name) {
-		driver.manage().deleteCookieNamed(name);
+	public void delAllCookies() {
+		driver.manage().deleteAllCookies();
 	}
 	
 	public void refreshPage() {

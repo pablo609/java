@@ -16,6 +16,11 @@
        		<class name="facebook.tests.LoginPageBasicTest" />
     	</classes>
   	</test>
+  	<test name="LoginCookieCollection">
+    	<classes>
+       		<class name="facebook.tests.LoginCookieCollector" />
+    	</classes>
+  	</test>
   	<test name="MainPageTest">
     	<classes>
        		<class name="facebook.tests.MainPageSearchTest" />
