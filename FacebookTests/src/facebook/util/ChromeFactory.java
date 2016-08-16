@@ -24,8 +24,7 @@ public class ChromeFactory extends BrowserFactory {
 		options.addArguments("--user-data-dir=c:/seleniumdrivers/chromeprofile/");
 		options.addArguments("--start-maximized");
 		WebDriver driver = new ChromeDriver(options);
-		//driver.manage().window().maximize();
-		//driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		driver.manage().window().maximize();
 		return driver;
 	}
 	
