@@ -1,7 +1,12 @@
 package facebook.pages;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -15,7 +20,6 @@ public class MainPage extends FacebookPage {
 	private static final String PAGE_URL = "https://www.facebook.com";
 	private static final long WAIT_FOR_10SEC = 10l;
 	private static final long CHECK_EVERY_500MS = 500l;
-	private static final String LOGIN_COOKIE_NAME = "datr";
 	
 	private By searchInput = By.cssSelector("input[name='q'][role='combobox']"); //By.xpath("//input[@name='q'][@role='combobox']");
 	private By searchButton = By.cssSelector("form[action$='direct_search.php']>button"); //By.xpath("//form[contains(@action,'direct_search.php')]/child::button"); 
@@ -58,9 +62,11 @@ public class MainPage extends FacebookPage {
 		return driverInterface.findAllElements(searchedElementNamePattern);
 	}
 	
-	//TODO try to change it to readAllCookies not only the datr and see if it will work
-	public void readAndStoreLoginCookie() {
-		Cookie cookie = driverInterface.getCookieNamed(LOGIN_COOKIE_NAME);
-		Serialization.writeObjectToFile(cookie, LOGIN_COOKIE_DIR + LOGIN_COOKIE_NAME + ".ser");
+	public void readAndStoreAllCookies() {
+		Set<Cookie> cookies = driverInterface.getAllCookies();
+		
+		for(Cookie cookie : cookies) {
+			Serialization.writeObjectToFile(cookie, LOGIN_COOKIES_DIR + cookie.getName() + ".ser");
+		}
 	}
 }

@@ -10,8 +10,8 @@ import facebook.util.WebDriverInterface;
 
 public abstract class FacebookPage {
 	protected WebDriverInterface driverInterface;
-	protected static final String LOGIN_COOKIE_DIR = "data\\logincookie\\";
-	protected static final String LOGOUT_COOKIE_DIR = "data\\logoutcookie\\";
+	protected static final String LOGIN_COOKIES_DIR = "data\\logincookie\\";
+	protected static final String LOGOUT_COOKIES_DIR = "data\\logoutcookie\\";
 	
 	public abstract boolean isLoaded();
 	public abstract void configureCookieAndLoad();
@@ -55,7 +55,7 @@ public abstract class FacebookPage {
 	
 	
 	public void setLoginCookie() {
-		File dir = new File(LOGIN_COOKIE_DIR);
+		File dir = new File(LOGIN_COOKIES_DIR);
 		File[] files = dir.listFiles();
 		driverInterface.delAllCookies();
 		for(File file : files) {
@@ -65,7 +65,7 @@ public abstract class FacebookPage {
 	}
 	
 	public void setLogoutCookie() {
-		File dir = new File(LOGOUT_COOKIE_DIR);
+		File dir = new File(LOGOUT_COOKIES_DIR);
 		File[] files = dir.listFiles();
 		driverInterface.delAllCookies();
 		for(File file : files) {

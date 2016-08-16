@@ -19,7 +19,9 @@ public class FirefoxFactory extends BrowserFactory {
 	@Override
 	public WebDriver createWebDriver() {
 		ProfilesIni profile = new ProfilesIni();
-		FirefoxProfile myprofile = profile.getProfile("default");
-		return new FirefoxDriver(myprofile);
+		FirefoxProfile myprofile = profile.getProfile("selenium");
+		WebDriver driver = new FirefoxDriver(myprofile);
+		driver.manage().window().maximize();
+		return driver;
 	}
 }

@@ -1,6 +1,7 @@
 package facebook.util;
 
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -22,4 +23,5 @@ public interface WebDriverInterface {
 	void loadPage(String url);
 	void closePage();
 	List<WebElement> findAllElements(By locator);
+	Set<Cookie> getAllCookies();
 }

@@ -23,7 +23,7 @@ public class LoginCookieCollector {
 		loginPage.setPasswordLogin("John602");
 		loginPage.logIn();
 		Assert.assertTrue(mainPage.isLoaded());
-		mainPage.readAndStoreLoginCookie();
+		mainPage.readAndStoreAllCookies();
 		mainPage.close();
 	}
 }
