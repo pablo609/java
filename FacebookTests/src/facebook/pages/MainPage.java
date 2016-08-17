@@ -23,6 +23,7 @@ public class MainPage extends FacebookPage {
 	private By postInputEnabler = By.xpath("//textarea[contains(@title, 's on your mind')]/ancestor::div[1]");
 	private By postInput = By.cssSelector("div#feedx_container>div>div:nth-of-type(2)>div>div>div:nth-of-type(2)>div>div>div>div>div:nth-of-type(2)>div");
 	private By postButton = By.cssSelector("div#feedx_container button");
+	private By latestPost = By.cssSelector("div[id^='topnews_main_stream']>div[id^='feed_stream']>div>div>div:nth-of-type(2)>div>div:nth-of-type(4)>p");
 	
 	public MainPage(WebDriverInterface driverInterface) {
 		super(driverInterface);
@@ -76,5 +77,12 @@ public class MainPage extends FacebookPage {
 	
 	public void clickPostButton() {
 		click(postButton);
+	}
+	
+	public String getRecentlyPostedText() {
+		if(isElementVisible(latestPost, WAIT_FOR_10SEC, CHECK_EVERY_500MS))
+			return getText(latestPost);
+		else
+			return null;
 	}
 }

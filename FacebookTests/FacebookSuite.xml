@@ -24,6 +24,8 @@
   	<test name="MainPageTest">
     	<classes>
        		<class name="facebook.tests.MainPageSearchTest" />
+       		<class name="facebook.tests.MainPagePostTest" />
     	</classes>
   	</test>
+  	
 </suite>

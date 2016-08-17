@@ -16,6 +16,7 @@ public interface WebDriverInterface {
 	boolean isElementVisible(By locator);
 	boolean isElementVisible(By locator, long timeoutInSec);
 	boolean isElementVisible(By locator, long timeoutInSec, long pollingIntervalInMSec);
+	boolean isElementVisibleWithText(By locator, String text, long timeoutInSec, long pollingIntervalInMSec);
 	void addCookie(Cookie cookie);
 	void delAllCookies();
 	Cookie getCookieNamed(String name);
@@ -24,4 +25,5 @@ public interface WebDriverInterface {
 	void closePage();
 	List<WebElement> findAllElements(By locator);
 	Set<Cookie> getAllCookies();
+	String getText(By locator);
 }

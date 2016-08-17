@@ -1,5 +1,7 @@
 package facebook.tests;
 
+import java.util.Date;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -30,8 +32,10 @@ public class MainPagePostTest {
 	
 	@Test
 	public void verifyMainPageAddingPost() {
-		page.setPostInput("Test Post 123");
+		Date date = new Date();
+		String post = "Test Post " + date.toString();
+		page.setPostInput(post);
 		page.clickPostButton();
-		Assert.assertTrue(false, "Need to add verification if the post is on the page!");
+		Assert.assertEquals(page.getRecentlyPostedText(), post);
 	}
 }

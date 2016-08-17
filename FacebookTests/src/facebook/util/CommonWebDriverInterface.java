@@ -89,6 +89,32 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 		return retVal;
 	}
 	
+	public boolean isElementVisibleWithText(By locator, String text, long timeoutInSec, long pollingIntervalInMSec) {
+		boolean retVal = true;
+		
+		try {
+			new FluentWait<WebDriver>(driver)							
+				.withTimeout(timeoutInSec, TimeUnit.SECONDS) 			
+				.pollingEvery(pollingIntervalInMSec, TimeUnit.MILLISECONDS) 			
+				.ignoring(NoSuchElementException.class)
+				.until(new Function<WebDriver, Boolean>() {							
+					public Boolean apply(WebDriver driver) {
+						WebElement element = driver.findElement(locator);
+						String elementText = element.getText();
+						if(element.isDisplayed() && elementText.equals(text))
+							return true;
+						else
+							return false;
+					}		
+				});
+		}
+		catch(TimeoutException e) {
+			retVal = false;
+		}
+		
+		return retVal;
+	}
+	
 	public Cookie getCookieNamed(String cookieName) {
 		return driver.manage().getCookieNamed(cookieName);
 	}
@@ -119,5 +145,9 @@ public class CommonWebDriverInterface implements WebDriverInterface {
 	
 	public Set<Cookie> getAllCookies() {
 		return driver.manage().getCookies();
+	}
+	
+	public String getText(By locator) {
+		return driver.findElement(locator).getText();
 	}
 }

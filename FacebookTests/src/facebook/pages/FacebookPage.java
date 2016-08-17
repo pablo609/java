@@ -53,6 +53,9 @@ public abstract class FacebookPage {
 		return driverInterface.isElementVisible(locator, timeoutInSec, pollingIntervalInMSec);
 	}
 	
+	public boolean isElementVisibleWithText(By locator, String text, long timeoutInSec, long pollingIntervalInMSec) {
+		return driverInterface.isElementVisibleWithText(locator, text, timeoutInSec, pollingIntervalInMSec);
+	}
 	
 	public void setLoginCookie() {
 		File dir = new File(LOGIN_COOKIES_DIR);
@@ -76,5 +79,9 @@ public abstract class FacebookPage {
 	
 	public void close() {
 		driverInterface.closePage();
+	}
+	
+	public String getText(By locator) {
+		return driverInterface.getText(locator);
 	}
 }
