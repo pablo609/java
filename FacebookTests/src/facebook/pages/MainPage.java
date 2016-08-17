@@ -20,6 +20,9 @@ public class MainPage extends FacebookPage {
 	private By searchButton = By.cssSelector("form[action$='direct_search.php']>button"); //By.xpath("//form[contains(@action,'direct_search.php')]/child::button"); 
 	private By seeMoreSearch = By.cssSelector("a[href^='/search/str']"); //By.xpath("//a[starts-with(@href,'/search/str')]");
 	private By searchedElementNamePattern = By.cssSelector("div#BrowseResultsContainer>div>div>div>div>div>div>div:nth-of-type(2)>div>a>div>div"); //By.xpath("//div[@id='BrowseResultsContainer']/descendant::div[6]/div[2]/div/a/descendant::div[2]");
+	private By postInputEnabler = By.xpath("//textarea[contains(@title, 's on your mind')]/ancestor::div[1]");
+	private By postInput = By.cssSelector("div#feedx_container>div>div:nth-of-type(2)>div>div>div:nth-of-type(2)>div>div>div>div>div:nth-of-type(2)>div");
+	private By postButton = By.cssSelector("div#feedx_container button");
 	
 	public MainPage(WebDriverInterface driverInterface) {
 		super(driverInterface);
@@ -63,5 +66,15 @@ public class MainPage extends FacebookPage {
 		for(Cookie cookie : cookies) {
 			Serialization.writeObjectToFile(cookie, LOGIN_COOKIES_DIR + cookie.getName() + ".ser");
 		}
+	}
+	
+	public void setPostInput(String text) {
+		click(postInputEnabler);
+		isElementVisible(postInput, WAIT_FOR_10SEC, CHECK_EVERY_500MS);
+		setText(postInput, text);
+	}
+	
+	public void clickPostButton() {
+		click(postButton);
 	}
 }
