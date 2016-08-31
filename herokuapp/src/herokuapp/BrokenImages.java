@@ -1,12 +1,12 @@
 package herokuapp;
 
-import java.io.IOException;
+
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -20,11 +20,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class BrokenImages {
-	private WebDriver driver = new FirefoxDriver();
+	private WebDriver driver;
 	
 	@BeforeClass
 	public void setUp() {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get("http://the-internet.herokuapp.com");
+		driver.manage().window().maximize();
 		driver.findElement(By.cssSelector("a[href='/broken_images']")).click();
 	}
 	

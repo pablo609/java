@@ -1,5 +1,7 @@
 package herokuapp;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,12 +12,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ABTesting {
-	private WebDriver driver = new FirefoxDriver();
+	private WebDriver driver;
 	private static final String ADDRESS = "http://the-internet.herokuapp.com";
 	private static final By LINK = By.cssSelector("a[href='/abtest']");
 	
 	@BeforeClass
 	public void setUp() {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get(ADDRESS);
 		driver.manage().window().maximize();
 		driver.findElement(LINK).click();

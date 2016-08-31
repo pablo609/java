@@ -1,5 +1,6 @@
 package herokuapp;
 
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,12 +18,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class BasicAuth {
-	private WebDriver driver = new FirefoxDriver();
+	private WebDriver driver;
 	private static final String ADDRESS = "http://the-internet.herokuapp.com";
 	private static final String LINK = "/basic_auth";
 	
 	@BeforeClass
 	public void setUp() {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get(ADDRESS);
 		driver.manage().window().maximize();
 	}

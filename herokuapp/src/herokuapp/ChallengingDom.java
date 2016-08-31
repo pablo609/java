@@ -2,6 +2,7 @@ package herokuapp;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
 import org.openqa.selenium.By;
@@ -13,10 +14,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class ChallengingDom {
-	private WebDriver driver = new FirefoxDriver();
+	private WebDriver driver;
 	
 	@BeforeClass
 	public void setUp() {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get("http://the-internet.herokuapp.com");
 		driver.findElement(By.cssSelector("a[href='/challenging_dom']")).click();

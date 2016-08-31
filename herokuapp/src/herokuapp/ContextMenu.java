@@ -1,5 +1,7 @@
 package herokuapp;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
@@ -15,10 +17,12 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 
 public class ContextMenu {
-private WebDriver driver = new FirefoxDriver();
+private WebDriver driver;
 	
 	@BeforeClass
 	public void setUp() {
+		driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.get("http://the-internet.herokuapp.com");
 		driver.manage().window().maximize();
 		driver.findElement(By.cssSelector("a[href='/context_menu']")).click();
