@@ -30,7 +30,7 @@ public class DragAndDrop {
 		driver.close();
 	}
 	
-	@Test(enabled = false)
+	@Test
 	public void test() throws Exception {
 		if(true) {
 			throw new SkipException("Drag And Drop doesn't work in HTML5");
