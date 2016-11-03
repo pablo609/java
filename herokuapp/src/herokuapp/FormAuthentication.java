@@ -11,8 +11,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import com.google.common.base.Predicate;
 
@@ -21,7 +21,7 @@ import static org.testng.Assert.*;
 public class FormAuthentication {
 	private WebDriver driver;
 	
-	@BeforeTest
+	@BeforeClass
 	public void setUp() {
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
@@ -29,7 +29,7 @@ public class FormAuthentication {
 		driver.findElement(By.linkText("Form Authentication")).click();
 	}
 	
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		driver.close();
 	}

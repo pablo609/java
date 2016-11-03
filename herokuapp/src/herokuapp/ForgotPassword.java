@@ -9,7 +9,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -19,7 +21,7 @@ public class ForgotPassword {
 	WebDriver mainDriver;
 	WebDriver emailDriver;
 	
-	@BeforeTest
+	@BeforeClass
 	public void setUp() {
 		mainDriver = new FirefoxDriver();
 		mainDriver.manage().window().maximize();
@@ -28,7 +30,7 @@ public class ForgotPassword {
 		mainDriver.findElement(By.cssSelector("a[href='/forgot_password'")).click();
 	}
 	
-	@AfterTest
+	@AfterClass
 	public void tearDown() {
 		mainDriver.close();
 		emailDriver.close();
