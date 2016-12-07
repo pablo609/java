@@ -8,12 +8,11 @@ import org.pawel.fluentherokuapp.pages.HerokuappMainPage;
 /**
  * Created by pawel on 2016-12-01.
  */
-public class FramesTest extends FluentTest {
-    @Page
-    HerokuappMainPage herokuappMainPage;
-
+public class FramesTest extends BaseTest {
     @Test
-    public void test() {
-        goTo(herokuappMainPage);
+    public void testFrames() throws Exception {
+        goTo(herokuappMainPage).clickFramesLink();
+
+        Thread.sleep(5000);
     }
 }
