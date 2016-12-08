@@ -2,7 +2,6 @@ package org.pawel.fluentherokuapp.pages;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.annotation.Page;
-import org.fluentlenium.core.annotation.PageUrl;
 import org.fluentlenium.core.domain.FluentWebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -18,7 +17,9 @@ public class HerokuappMainPage extends FluentPage {
     private FluentWebElement framesLink;
 
     @Page
-    FormAuthenticationPage formAuthenticationPage;
+    private FormAuthenticationPage formAuthenticationPage;
+    @Page
+    private FramesPage framesPage;
 
     @Override
     public void isAt() {
@@ -30,8 +31,10 @@ public class HerokuappMainPage extends FluentPage {
         return "http://the-internet.herokuapp.com/";
     }
 
-    public void clickFramesLink() {
+    public FramesPage clickFramesLink() {
         framesLink.click();
+
+        return framesPage;
     }
 
     public FormAuthenticationPage clickFormAuthenticationLink() {
