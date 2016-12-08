@@ -20,3 +20,7 @@ test-output/
 
 #Properties files
 *.properties
+
+#IntelliJ
+*/.idea/workspace.xml
+*/.idea/tasks.xml
