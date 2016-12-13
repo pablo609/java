@@ -2,6 +2,7 @@ package org.pawel.fluentherokuapp.pages;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.hook.wait.Wait;
 import org.openqa.selenium.support.FindBy;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by pawel on 2016-12-08.
  */
+@Wait
 public class NestedFramesPage extends FluentPage {
     @FindBy(css = "body")
     FluentWebElement frameBody;

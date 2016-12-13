@@ -2,11 +2,13 @@ package org.pawel.fluentherokuapp.pages;
 
 import org.fluentlenium.core.FluentPage;
 import org.fluentlenium.core.domain.FluentWebElement;
+import org.fluentlenium.core.hook.wait.Wait;
 import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by pawel on 2016-12-08.
  */
+@Wait
 public class IFramePage extends FluentPage {
     @FindBy(css = "#tinymce")
     private FluentWebElement frameBody;

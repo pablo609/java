@@ -5,6 +5,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.pawel.fluentherokuapp.pages.FormAuthenticationPage;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
