@@ -15,11 +15,19 @@ public class HerokuappMainPage extends FluentPage {
     private FluentWebElement formAuthenticationLink;
     @FindBy(linkText = "Frames")
     private FluentWebElement framesLink;
+    @FindBy(linkText = "Geolocation")
+    private FluentWebElement geolocationLink;
+    @FindBy(linkText = "Horizontal Slider")
+    private FluentWebElement horizontalSliderLink;
 
     @Page
     private FormAuthenticationPage formAuthenticationPage;
     @Page
     private FramesPage framesPage;
+    @Page
+    private GeolocationPage geolocationPage;
+    @Page
+    private HorizontalSliderPage horizontalSliderPage;
 
     @Override
     public void isAt() {
@@ -41,5 +49,17 @@ public class HerokuappMainPage extends FluentPage {
         formAuthenticationLink.click();
 
         return formAuthenticationPage;
+    }
+
+    public GeolocationPage clickGeolocationLink() {
+        geolocationLink.click();
+
+        return geolocationPage;
+    }
+
+    public HorizontalSliderPage clickHorizontalSliderLink() {
+        horizontalSliderLink.click();
+
+        return horizontalSliderPage;
     }
 }
