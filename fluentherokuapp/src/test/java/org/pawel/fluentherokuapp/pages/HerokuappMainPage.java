@@ -19,6 +19,10 @@ public class HerokuappMainPage extends FluentPage {
     private FluentWebElement geolocationLink;
     @FindBy(linkText = "Horizontal Slider")
     private FluentWebElement horizontalSliderLink;
+    @FindBy(linkText = "Hovers")
+    private FluentWebElement hoversLink;
+    @FindBy(linkText = "Infinite Scroll")
+    private FluentWebElement infiniteScrollLink;
 
     @Page
     private FormAuthenticationPage formAuthenticationPage;
@@ -28,6 +32,10 @@ public class HerokuappMainPage extends FluentPage {
     private GeolocationPage geolocationPage;
     @Page
     private HorizontalSliderPage horizontalSliderPage;
+    @Page
+    private HoversPage hoversPagePage;
+    @Page
+    private InfiniteScrollPage infiniteScrollPage;
 
     @Override
     public void isAt() {
@@ -61,5 +69,17 @@ public class HerokuappMainPage extends FluentPage {
         horizontalSliderLink.click();
 
         return horizontalSliderPage;
+    }
+
+    public HoversPage clickHoversLink() {
+        hoversLink.click();
+
+        return hoversPagePage;
+    }
+
+    public InfiniteScrollPage clickInfiniteScrollLink() {
+        infiniteScrollLink.click();
+
+        return infiniteScrollPage;
     }
 }
