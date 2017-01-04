@@ -23,6 +23,10 @@ public class HerokuappMainPage extends FluentPage {
     private FluentWebElement hoversLink;
     @FindBy(linkText = "Infinite Scroll")
     private FluentWebElement infiniteScrollLink;
+    @FindBy(linkText = "JQuery UI Menus")
+    private FluentWebElement jQueryUIMenusLink;
+    @FindBy(linkText = "JavaScript Alerts")
+    private FluentWebElement javaScriptAlertsLink;
 
     @Page
     private FormAuthenticationPage formAuthenticationPage;
@@ -36,6 +40,10 @@ public class HerokuappMainPage extends FluentPage {
     private HoversPage hoversPagePage;
     @Page
     private InfiniteScrollPage infiniteScrollPage;
+    @Page
+    private JQueryUIMenusPage jQueryUIMenusPage;
+    @Page
+    private JavaScriptAlertsPage javaScriptAlertsPage;
 
     @Override
     public void isAt() {
@@ -81,5 +89,17 @@ public class HerokuappMainPage extends FluentPage {
         infiniteScrollLink.click();
 
         return infiniteScrollPage;
+    }
+
+    public JQueryUIMenusPage clickJQueryUIMenusLink() {
+        jQueryUIMenusLink.click();
+
+        return jQueryUIMenusPage;
+    }
+
+    public JavaScriptAlertsPage clickJavaScriptAlertsLink() {
+        javaScriptAlertsLink.click();
+
+        return javaScriptAlertsPage;
     }
 }

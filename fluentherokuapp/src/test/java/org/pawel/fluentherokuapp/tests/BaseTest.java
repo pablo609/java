@@ -20,15 +20,15 @@ public class BaseTest extends FluentTest {
     HerokuappMainPage herokuappMainPage;
 
     public BaseTest() {
-//        setWebDriver("chrome");
-//        System.setProperty("webdriver.chrome.driver", "C:\\seleniumdrivers\\chromedriver.exe");
+        setWebDriver("chrome");
+        System.setProperty("webdriver.chrome.driver", "C:\\seleniumdrivers\\chromedriver.exe");
 
-        setWebDriver("firefox");
-        System.setProperty("webdriver.gecko.driver", "C:\\seleniumdrivers\\geckodriver.exe");
-        FirefoxProfile profile = new ProfilesIni().getProfile("selenium");
-        DesiredCapabilities dc = DesiredCapabilities.firefox();
-        dc.setCapability(FirefoxDriver.PROFILE, profile);
-        setCapabilities(dc);
+//        setWebDriver("firefox");
+//        System.setProperty("webdriver.gecko.driver", "C:\\seleniumdrivers\\geckodriver.exe");
+//        FirefoxProfile profile = new ProfilesIni().getProfile("selenium");
+//        DesiredCapabilities dc = DesiredCapabilities.firefox();
+//        dc.setCapability(FirefoxDriver.PROFILE, profile);
+//        setCapabilities(dc);
     }
 
 
