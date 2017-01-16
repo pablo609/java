@@ -27,6 +27,10 @@ public class HerokuappMainPage extends FluentPage {
     private FluentWebElement jQueryUIMenusLink;
     @FindBy(linkText = "JavaScript Alerts")
     private FluentWebElement javaScriptAlertsLink;
+    @FindBy(linkText = "Key Presses")
+    private FluentWebElement keyPressesLink;
+    @FindBy(linkText = "Large & Deep DOM")
+    private FluentWebElement largeAndDeepDOMLink;
 
     @Page
     private FormAuthenticationPage formAuthenticationPage;
@@ -44,6 +48,10 @@ public class HerokuappMainPage extends FluentPage {
     private JQueryUIMenusPage jQueryUIMenusPage;
     @Page
     private JavaScriptAlertsPage javaScriptAlertsPage;
+    @Page
+    private KeyPressesPage keyPressesPage;
+    @Page
+    private LargeAndDeepDOMPage largeAndDeepDOMPage;
 
     @Override
     public void isAt() {
@@ -101,5 +109,17 @@ public class HerokuappMainPage extends FluentPage {
         javaScriptAlertsLink.click();
 
         return javaScriptAlertsPage;
+    }
+
+    public KeyPressesPage clickKeyPressesLink() {
+        keyPressesLink.click();
+
+        return keyPressesPage;
+    }
+
+    public LargeAndDeepDOMPage clickLargeAndDeepDOMLink() {
+        largeAndDeepDOMLink.click();
+
+        return largeAndDeepDOMPage;
     }
 }
