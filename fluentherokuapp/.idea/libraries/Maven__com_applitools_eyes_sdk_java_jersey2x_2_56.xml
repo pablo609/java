@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.applitools:eyes-sdk-java-jersey2x:2.56">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/applitools/eyes-sdk-java-jersey2x/2.56/eyes-sdk-java-jersey2x-2.56.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/applitools/eyes-sdk-java-jersey2x/2.56/eyes-sdk-java-jersey2x-2.56-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/applitools/eyes-sdk-java-jersey2x/2.56/eyes-sdk-java-jersey2x-2.56-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
