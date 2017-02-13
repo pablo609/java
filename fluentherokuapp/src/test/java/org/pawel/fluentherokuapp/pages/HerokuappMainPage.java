@@ -31,6 +31,10 @@ public class HerokuappMainPage extends FluentPage {
     private FluentWebElement keyPressesLink;
     @FindBy(linkText = "Large & Deep DOM")
     private FluentWebElement largeAndDeepDOMLink;
+    @FindBy(linkText = "Multiple Windows")
+    private FluentWebElement multipleWindowsLink;
+    @FindBy(linkText = "Sortable Data Tables")
+    private FluentWebElement sortableDataTablesLink;
 
     @Page
     private FormAuthenticationPage formAuthenticationPage;
@@ -52,6 +56,10 @@ public class HerokuappMainPage extends FluentPage {
     private KeyPressesPage keyPressesPage;
     @Page
     private LargeAndDeepDOMPage largeAndDeepDOMPage;
+    @Page
+    private MultipleWindowsPage multipleWindowsPage;
+    @Page
+    private SortableDataTablePage sortableDataTablePage;
 
     @Override
     public void isAt() {
@@ -121,5 +129,17 @@ public class HerokuappMainPage extends FluentPage {
         largeAndDeepDOMLink.click();
 
         return largeAndDeepDOMPage;
+    }
+
+    public MultipleWindowsPage clickMultipleWindowsLink() {
+        multipleWindowsLink.click();
+
+        return multipleWindowsPage;
+    }
+
+    public SortableDataTablePage clickSortableDataTableLink() {
+        sortableDataTablesLink.click();
+
+        return sortableDataTablePage;
     }
 }
