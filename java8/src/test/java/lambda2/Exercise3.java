@@ -51,7 +51,7 @@ public class Exercise3 {
         method4(Math::random);
     }
 
-    private <T> void method4(Supplier<T> suplier) {}
+    private <T> void method4(Supplier<T> supplier) {}
 }
 
 interface TriFunction {
