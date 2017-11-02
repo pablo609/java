@@ -17,7 +17,7 @@ class BasicSimulation extends Simulation {
   val search = scenario("Search").exec(Search.search)
 
   setUp(
-    home.inject(rampUsers(20) over (10 seconds)),
-    search.inject(rampUsers(20) over (10 seconds))
+//    home.inject(rampUsers(20) over (10 seconds)),
+    search.inject(rampUsers(5) over (5 seconds))
   ).protocols(httpConf)
 }

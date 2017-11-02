@@ -8,12 +8,14 @@ object Search {
     Map("searchCriterion" -> "Asus", "bar" -> "bar2"),
     Map("searchCriterion" -> "Dell", "bar" -> "bar3")).random
 
-  val search = repeat(5, "n") {
+  val search = tryMax(3) {
     feed(feeder)
-      .exec(http("search ${n}")
-        .get("/computers?f=${searchCriterion}"))
-      .pause(2)
-  }
+      .exec(http("search")
+        .get("/computers?f=${searchCriterion}")
+        .check(substring("MacBook")))
+  }.exitHereIfFailed
+
+
   //    .exec(http("Select")
   //      .get("/computers/6"))
   //    .pause(3)
